@@ -1,0 +1,4 @@
+#Tue Jan 03 14:03:11 IST 2023
+base.0=/Users/niketjain/AndroidStudioProjects/personal_github_projects/first_flutter_project/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
