@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/overlays/game_hud.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -6,8 +7,6 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 
 class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
-  late Skeleton skeleton;
-  final Timer _attackAnimationTimer = Timer(1.5);
 
   static const _imageAssets = [
     'skeleton_stripes/walk.png',
@@ -16,8 +15,12 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
     'skeleton_stripes/dead.png',
   ];
 
+  late Skeleton _skeleton;
+  final Timer _attackAnimationTimer = Timer(1.5);
+
   @override
   Future<void> onLoad() async {
+    _attackAnimationTimer.pause();
     await images.loadAll(_imageAssets);
 
     /// Create a [ParallaxComponent]
@@ -33,25 +36,15 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       velocityMultiplierDelta: Vector2(1.4, 0),
     );
 
-    skeleton = Skeleton(
-      skeletonWalkImage: images.fromCache('skeleton_stripes/walk.png'),
-      skeletonHitImage: images.fromCache('skeleton_stripes/hit.png'),
-      skeletonAttackImage: images.fromCache('skeleton_stripes/attack.png'),
-      skeletonDeadImage: images.fromCache('skeleton_stripes/dead.png'),
-    );
-
     add(parallaxBackground);
-    add(skeleton);
-
-    return super.onLoad();
   }
 
   @override
   void mount() {
-    super.mount();
     _attackAnimationTimer.onTick = () {
-      skeleton.animation = skeleton.walkAnimation();
+      _skeleton.animation = _skeleton.walkAnimation();
     };
+    super.mount();
   }
 
   @override
@@ -67,30 +60,46 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   }
 
   void _attackSkeletonAction() {
-    skeleton.animation = skeleton.attackAnimation();
+    _skeleton.animation = _skeleton.attackAnimation();
     _attackAnimationTimer.start();
+  }
+
+  void startGame() {
+    _skeleton = Skeleton(
+      skeletonWalkImage: images.fromCache('skeleton_stripes/walk.png'),
+      skeletonHitImage: images.fromCache('skeleton_stripes/hit.png'),
+      skeletonAttackImage: images.fromCache('skeleton_stripes/attack.png'),
+      skeletonDeadImage: images.fromCache('skeleton_stripes/dead.png'),
+    );
+
+    add(_skeleton);
+  }
+
+  void reset() {
+    _skeleton.removeFromParent();
+    overlays.remove(GameHud.id);
   }
 
   @override
   void lifecycleStateChange(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
-      // On resume, if active overlay is not PauseMenu,
-      // resume the engine (lets the parallax effect play).
-      //   if (!(overlays.isActive(PauseMenu.id)) &&
-      //       !(overlays.isActive(GameOverMenu.id))) {
-      //     resumeEngine();
-      //   }
+        // On resume, if active overlay is not PauseMenu,
+        // resume the engine (lets the parallax effect play).
+        //   if (!(overlays.isActive(PauseMenu.id)) &&
+        //       !(overlays.isActive(GameOverMenu.id))) {
+        //     resumeEngine();
+        //   }
         break;
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.inactive:
-      // If game is active, then remove Hud and add PauseMenu
-      // before pausing the game.
-      //   if (overlays.isActive(Hud.id)) {
-      //     overlays.remove(Hud.id);
-      //     overlays.add(PauseMenu.id);
-      //   }
+        // If game is active, then remove Hud and add PauseMenu
+        // before pausing the game.
+        //   if (overlays.isActive(Hud.id)) {
+        //     overlays.remove(Hud.id);
+        //     overlays.add(PauseMenu.id);
+        //   }
         pauseEngine();
         break;
     }

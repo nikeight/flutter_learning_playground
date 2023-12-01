@@ -1,9 +1,13 @@
 import 'dart:ui';
 
+import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 
 class GameOverOverlay extends StatelessWidget {
-  const GameOverOverlay({super.key});
+  static const id = 'GameOverMenu';
+  final SkeletonGame skeletonGameRef;
+
+  const GameOverOverlay(this.skeletonGameRef, {super.key});
 
   @override
   Widget build(BuildContext context) {

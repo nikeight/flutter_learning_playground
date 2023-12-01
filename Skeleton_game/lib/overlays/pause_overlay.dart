@@ -1,9 +1,15 @@
 import 'dart:ui';
 
+import 'package:first_flutter_project/overlays/game_hud.dart';
+import 'package:first_flutter_project/overlays/main_menu_overlay.dart';
+import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 
 class PauseOverlay extends StatelessWidget {
-  const PauseOverlay({super.key});
+  static const id = "PauseMenu";
+  final SkeletonGame skeletonGameRef;
+
+  const PauseOverlay(this.skeletonGameRef, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +39,9 @@ class PauseOverlay extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // gameRef.overlays.remove(PauseMenu.id);
-                      // gameRef.overlays.add(Hud.id);
-                      // gameRef.resumeEngine();
+                      skeletonGameRef.overlays.remove(PauseOverlay.id);
+                      skeletonGameRef.overlays.add(GameHud.id);
+                      skeletonGameRef.resumeEngine();
                       // AudioManager.instance.resumeBgm();
                     },
                     child: const Text(
@@ -47,11 +53,9 @@ class PauseOverlay extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // gameRef.overlays.remove(PauseMenu.id);
-                      // gameRef.overlays.add(Hud.id);
-                      // gameRef.resumeEngine();
-                      // gameRef.reset();
-                      // gameRef.startGamePlay();
+                      skeletonGameRef.overlays.remove(PauseOverlay.id);
+                      skeletonGameRef.overlays.add(GameHud.id);
+                      skeletonGameRef.resumeEngine();
                       // AudioManager.instance.resumeBgm();
                     },
                     child: const Text(
@@ -63,10 +67,10 @@ class PauseOverlay extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // gameRef.overlays.remove(PauseMenu.id);
-                      // gameRef.overlays.add(MainMenu.id);
-                      // gameRef.resumeEngine();
-                      // gameRef.reset();
+                      skeletonGameRef.overlays.remove(PauseOverlay.id);
+                      skeletonGameRef.overlays.add(MainMenuOverLay.id);
+                      skeletonGameRef.resumeEngine();
+                      skeletonGameRef.reset();
                       // AudioManager.instance.resumeBgm();
                     },
                     child: const Text(

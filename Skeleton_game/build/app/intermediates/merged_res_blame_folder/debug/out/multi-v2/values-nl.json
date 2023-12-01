@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/niketjain/FlutterProjects/flutter_learning_playground/HelloWorldProject/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
+            "outputFile": "/Users/niketjain/FlutterProjects/flutter_learning_playground/Skeleton_game/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
             "map": [
                 {
-                    "source": "/Users/niketjain/.gradle/caches/transforms-3/acbce933e4b464a5224ed377a62db1f5/transformed/core-1.6.0/res/values-nl/values-nl.xml",
+                    "source": "/Users/niketjain/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/res/values-nl/values-nl.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

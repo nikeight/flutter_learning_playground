@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:first_flutter_project/overlays/game_hud.dart';
+import 'package:first_flutter_project/overlays/setting_overlay.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 
@@ -39,9 +41,9 @@ class MainMenuOverLay extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // gameReference.startGamePlay();
-                      // gameReference.overlays.remove(MainMenu.id);
-                      // gameReference.overlays.add(Hud.id);
+                      gameReference.startGame();
+                      gameReference.overlays.remove(MainMenuOverLay.id);
+                      gameReference.overlays.add(GameHud.id);
                     },
                     child: const Text(
                       'Play',
@@ -52,8 +54,8 @@ class MainMenuOverLay extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // gameReference.overlays.remove(MainMenu.id);
-                      // gameReference.overlays.add(SettingsMenu.id);
+                      gameReference.overlays.remove(MainMenuOverLay.id);
+                      gameReference.overlays.add(SettingOverlay.id);
                     },
                     child: const Text(
                       'Settings',

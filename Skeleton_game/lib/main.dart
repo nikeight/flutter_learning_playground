@@ -2,7 +2,8 @@ import 'package:first_flutter_project/skeleton_game/skeleton_game_app.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+
+Future<void> main() async {
   // Ensures that all bindings are initialized
   // before was start calling hive and flame code
   // dealing with platform channels.

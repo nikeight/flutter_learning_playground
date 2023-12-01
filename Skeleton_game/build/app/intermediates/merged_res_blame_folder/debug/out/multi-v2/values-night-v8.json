@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/niketjain/FlutterProjects/flutter_learning_playground/HelloWorldProject/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/Users/niketjain/FlutterProjects/flutter_learning_playground/Skeleton_game/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/niketjain/FlutterProjects/flutter_learning_playground/HelloWorldProject/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/niketjain/FlutterProjects/flutter_learning_playground/Skeleton_game/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

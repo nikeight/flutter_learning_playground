@@ -1,9 +1,12 @@
 import 'dart:ui';
-
+import 'package:first_flutter_project/overlays/main_menu_overlay.dart';
+import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 
 class SettingOverlay extends StatelessWidget {
-  const SettingOverlay({super.key});
+  static const id = 'SettingMenu';
+  final SkeletonGame skeletonGameRef;
+  const SettingOverlay(this.skeletonGameRef,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +72,8 @@ class SettingOverlay extends StatelessWidget {
                   // ),
                   TextButton(
                     onPressed: () {
-                      // gameRef.overlays.remove(SettingsMenu.id);
-                      // gameRef.overlays.add(MainMenu.id);
+                      skeletonGameRef.overlays.remove(SettingOverlay.id);
+                      skeletonGameRef.overlays.add(MainMenuOverLay.id);
                     },
                     child: const Icon(Icons.arrow_back_ios_rounded),
                   ),
