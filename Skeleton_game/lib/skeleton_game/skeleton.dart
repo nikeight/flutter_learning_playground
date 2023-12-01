@@ -1,7 +1,11 @@
+import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/experimental.dart';
 import 'package:flame/extensions.dart';
 
-class Skeleton extends SpriteAnimationComponent {
+class Skeleton extends SpriteAnimationComponent
+    with CollisionCallbacks, HasGameReference<SkeletonGame> {
   final Image skeletonWalkImage;
   final Image skeletonHitImage;
   final Image skeletonAttackImage;
@@ -18,8 +22,9 @@ class Skeleton extends SpriteAnimationComponent {
   void onMount() {
     animation = walkAnimation();
     scale = Vector2(2, 2);
-    y = size.y + 65;
-    x = 200;
+    // `70` as we have scaled the Skeleton to twice,(not 35)
+    position = Vector2(180, game.size.y - 70);
+    x = 180;
     super.onMount();
   }
 
@@ -62,4 +67,10 @@ class Skeleton extends SpriteAnimationComponent {
           texturePosition: Vector2(33, 0),
         ),
       );
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    // TODO: implement onCollision
+    super.onCollision(intersectionPoints, other);
+  }
 }

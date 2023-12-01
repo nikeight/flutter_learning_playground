@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/enemy/enemy_manager.dart';
 import 'package:first_flutter_project/overlays/game_hud.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
@@ -7,21 +8,23 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 
 class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
-
   static const _imageAssets = [
     'skeleton_stripes/walk.png',
     'skeleton_stripes/attack.png',
     'skeleton_stripes/hit.png',
     'skeleton_stripes/dead.png',
+    'enemy_stripes/ghoul_run.png'
   ];
 
   late Skeleton _skeleton;
+  final EnemyManager _enemyManager = EnemyManager();
   final Timer _attackAnimationTimer = Timer(1.5);
 
   @override
   Future<void> onLoad() async {
     _attackAnimationTimer.pause();
     await images.loadAll(_imageAssets);
+    camera.viewport = FixedResolutionViewport(Vector2(size.x, size.y));
 
     /// Create a [ParallaxComponent]
     final parallaxBackground = await loadParallaxComponent(
@@ -72,11 +75,19 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       skeletonDeadImage: images.fromCache('skeleton_stripes/dead.png'),
     );
 
+    // _enemyManager = EnemyManager(images.fromCache('enemy_stripes/ghoul_run.png'));
+
     add(_skeleton);
+    add(_enemyManager);
+    _enemyManager.enemySpawnTimer.onTick = (){
+      _enemyManager.spawnEnemies();
+    };
   }
 
   void reset() {
     _skeleton.removeFromParent();
+    _enemyManager.removeAllEnemiesFromWindow();
+    _enemyManager.removeFromParent();
     overlays.remove(GameHud.id);
   }
 
