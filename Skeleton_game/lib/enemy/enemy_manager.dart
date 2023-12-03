@@ -7,8 +7,7 @@ import 'package:flame/experimental.dart';
 class EnemyManager extends Component with HasGameReference<SkeletonGame> {
   final List<EnemyData> _enemiesTypeList = [];
 
-  final Timer enemySpawnTimer = Timer(2, repeat: true);
-
+  final Timer enemySpawnTimer = Timer(4, repeat: true);
 
   spawnEnemies() {
     _enemiesTypeList.add(

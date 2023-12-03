@@ -105,6 +105,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.inactive:
+      case AppLifecycleState.hidden:
         // If game is active, then remove Hud and add PauseMenu
         // before pausing the game.
         //   if (overlays.isActive(Hud.id)) {
