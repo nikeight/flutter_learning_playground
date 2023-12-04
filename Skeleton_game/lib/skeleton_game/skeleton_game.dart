@@ -4,6 +4,7 @@ import 'package:first_flutter_project/models/settings_data.dart';
 import 'package:first_flutter_project/overlays/game_hud.dart';
 import 'package:first_flutter_project/overlays/game_over_overlay.dart';
 import 'package:first_flutter_project/overlays/pause_overlay.dart';
+import 'package:first_flutter_project/skeleton_game/flame_game_audio_manager.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -19,6 +20,11 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
     'skeleton_stripes/hit.png',
     'skeleton_stripes/dead.png',
     'enemy_stripes/ghoul_run.png'
+  ];
+
+  // List of all the audio assets.
+  static const _audioAssets = [
+    ''
   ];
 
   late Skeleton _skeleton;
@@ -41,6 +47,9 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
     // Setup the Hive Boxes
     playerData = await _readPlayerData();
     settingsData = await _readSettingsData();
+
+    // Setup Audio Manager
+    FGAudioManager.instance.initAudioManager(_audioAssets, settingsData);
 
     /// Create a [ParallaxComponent]
     final parallaxBackground = await loadParallaxComponent(

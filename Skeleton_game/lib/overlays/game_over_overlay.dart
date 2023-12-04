@@ -42,7 +42,7 @@ class GameOverOverlay extends StatelessWidget {
                     ),
                     Selector<PlayerData, int>(
                       selector: (_, playerData) => playerData.currentScore,
-                      builder: (_, currentScore, _) => Text(
+                      builder: (_, currentScore, __) => Text(
                         'Your Score : $currentScore',
                         style:
                             const TextStyle(fontSize: 24, color: Colors.white),
