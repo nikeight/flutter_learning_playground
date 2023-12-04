@@ -2,6 +2,8 @@ import 'package:first_flutter_project/enemy/enemy_manager.dart';
 import 'package:first_flutter_project/models/player_data.dart';
 import 'package:first_flutter_project/models/settings_data.dart';
 import 'package:first_flutter_project/overlays/game_hud.dart';
+import 'package:first_flutter_project/overlays/game_over_overlay.dart';
+import 'package:first_flutter_project/overlays/pause_overlay.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -82,10 +84,10 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       case AppLifecycleState.resumed:
         // On resume, if active overlay is not PauseMenu,
         // resume the engine (lets the parallax effect play).
-        //   if (!(overlays.isActive(PauseMenu.id)) &&
-        //       !(overlays.isActive(GameOverMenu.id))) {
-        //     resumeEngine();
-        //   }
+          if (!(overlays.isActive(PauseOverlay.id)) &&
+              !(overlays.isActive(GameOverOverlay.id))) {
+            resumeEngine();
+          }
         break;
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
@@ -93,10 +95,10 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       case AppLifecycleState.hidden:
         // If game is active, then remove Hud and add PauseMenu
         // before pausing the game.
-        //   if (overlays.isActive(Hud.id)) {
-        //     overlays.remove(Hud.id);
-        //     overlays.add(PauseMenu.id);
-        //   }
+          if (overlays.isActive(GameHud.id)) {
+            overlays.remove(GameHud.id);
+            overlays.add(PauseOverlay.id);
+          }
         pauseEngine();
         break;
     }

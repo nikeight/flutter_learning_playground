@@ -22,7 +22,7 @@ Future<void> main() async {
 }
 
 Future<void> _initHive() async {
-  final dir = await getApplicationDocumentsDirectory(); 
+  final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
   
   Hive.registerAdapter<PlayerData>(PlayerDataAdapter());
