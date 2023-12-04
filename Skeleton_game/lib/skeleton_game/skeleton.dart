@@ -1,8 +1,8 @@
-import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 
 import 'package:first_flutter_project/enemy/enemy.dart';
+import 'package:first_flutter_project/models/player_data.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -16,6 +16,8 @@ class Skeleton extends SpriteAnimationComponent
   final Image skeletonHitImage;
   final Image skeletonAttackImage;
   final Image skeletonDeadImage;
+  final PlayerData playerData;
+
   bool _isSkeletonHit = false;
   final Timer _hitTimer = Timer(1);
   final rectHitBoxBorder = BasicPalette.darkRed.paint()
@@ -26,6 +28,7 @@ class Skeleton extends SpriteAnimationComponent
     required this.skeletonHitImage,
     required this.skeletonAttackImage,
     required this.skeletonDeadImage,
+    required this.playerData,
   });
 
   @override
@@ -43,11 +46,12 @@ class Skeleton extends SpriteAnimationComponent
 
     // Add a hitBox
     add(
-      RectangleHitbox.relative(
-        Vector2(0.3,1),
-        parentSize: size,
-        position: Vector2(size.x * 0.3 ,size.y * 0.9) / 2
-      )
+      PolygonHitbox.relative([
+        Vector2(0, 1), // Middle of top wall
+        Vector2(1, 0), // Middle of right wall
+        Vector2(0, -1), // Middle of bottom wall
+        Vector2(-1, 0), // Middle of left wall
+      ], parentSize: size)
         ..renderShape = true
         ..paint = rectHitBoxBorder,
     );
@@ -70,7 +74,7 @@ class Skeleton extends SpriteAnimationComponent
           amount: 7,
           stepTime: 0.1,
           textureSize: Vector2(30, 32),
-          texturePosition: Vector2(-30, 0),
+          texturePosition: Vector2(-60, 0),
         ),
       );
 
@@ -113,6 +117,6 @@ class Skeleton extends SpriteAnimationComponent
     _isSkeletonHit = true;
     animation = hitAnimation();
     _hitTimer.start();
-    log("Hit being Called");
+    playerData.lives -= 1;
   }
 }

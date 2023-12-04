@@ -29,14 +29,9 @@ class Enemy extends SpriteAnimationComponent
   @override
   FutureOr<void> onLoad() {
     // Adding a Rectangle Around the enemy
-    add(
-        RectangleHitbox.relative(
-            Vector2.all(0.9),
-            parentSize: size
-        )
-            ..paint = rectHitBoxBorder
-            ..renderShape = true
-    );
+    add(RectangleHitbox.relative(Vector2.all(0.9), parentSize: size)
+      ..paint = rectHitBoxBorder
+      ..renderShape = true);
     return super.onLoad();
   }
 
@@ -56,6 +51,7 @@ class Enemy extends SpriteAnimationComponent
     // Delete Enemy from the frame if already dodged
     if (position.x < -enemyData.textureSize.x) {
       removeFromParent();
+      game.playerData.currentScore += 1;
     }
     super.update(dt);
   }
