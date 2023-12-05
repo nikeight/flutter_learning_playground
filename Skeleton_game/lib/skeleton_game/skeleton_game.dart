@@ -23,15 +23,15 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   ];
 
   // List of all the audio assets.
-  static const _audioAssets = [
-    ''
-  ];
+  static const _audioAssets = [''];
 
   late Skeleton _skeleton;
   late PlayerData playerData;
   late SettingsData settingsData;
   final EnemyManager _enemyManager = EnemyManager();
   final Timer _attackAnimationTimer = Timer(1.5);
+
+  bool isSkeletonAttacking = false;
 
   @override
   Future<void> onLoad() async {
@@ -49,7 +49,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
     settingsData = await _readSettingsData();
 
     // Setup Audio Manager
-    FGAudioManager.instance.initAudioManager(_audioAssets, settingsData);
+    // FGAudioManager.instance.initAudioManager(_audioAssets, settingsData);
 
     /// Create a [ParallaxComponent]
     final parallaxBackground = await loadParallaxComponent(
@@ -71,6 +71,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   void mount() {
     _attackAnimationTimer.onTick = () {
       _skeleton.animation = _skeleton.walkAnimation();
+      isSkeletonAttacking = false;
     };
     super.mount();
   }
@@ -93,10 +94,10 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       case AppLifecycleState.resumed:
         // On resume, if active overlay is not PauseMenu,
         // resume the engine (lets the parallax effect play).
-          if (!(overlays.isActive(PauseOverlay.id)) &&
-              !(overlays.isActive(GameOverOverlay.id))) {
-            resumeEngine();
-          }
+        if (!(overlays.isActive(PauseOverlay.id)) &&
+            !(overlays.isActive(GameOverOverlay.id))) {
+          resumeEngine();
+        }
         break;
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
@@ -104,10 +105,10 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
       case AppLifecycleState.hidden:
         // If game is active, then remove Hud and add PauseMenu
         // before pausing the game.
-          if (overlays.isActive(GameHud.id)) {
-            overlays.remove(GameHud.id);
-            overlays.add(PauseOverlay.id);
-          }
+        if (overlays.isActive(GameHud.id)) {
+          overlays.remove(GameHud.id);
+          overlays.add(PauseOverlay.id);
+        }
         pauseEngine();
         break;
     }
@@ -115,18 +116,18 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   }
 
   void _attackSkeletonAction() {
+    isSkeletonAttacking = true;
     _skeleton.animation = _skeleton.attackAnimation();
     _attackAnimationTimer.start();
   }
 
   void startGame() {
     _skeleton = Skeleton(
-      skeletonWalkImage: images.fromCache('skeleton_stripes/walk.png'),
-      skeletonHitImage: images.fromCache('skeleton_stripes/hit.png'),
-      skeletonAttackImage: images.fromCache('skeleton_stripes/attack.png'),
-      skeletonDeadImage: images.fromCache('skeleton_stripes/dead.png'),
-      playerData: playerData
-    );
+        skeletonWalkImage: images.fromCache('skeleton_stripes/walk.png'),
+        skeletonHitImage: images.fromCache('skeleton_stripes/hit.png'),
+        skeletonAttackImage: images.fromCache('skeleton_stripes/attack.png'),
+        skeletonDeadImage: images.fromCache('skeleton_stripes/dead.png'),
+        playerData: playerData);
 
     // _enemyManager = EnemyManager(images.fromCache('enemy_stripes/ghoul_run.png'));
 

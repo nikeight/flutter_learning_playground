@@ -1,6 +1,5 @@
-import 'dart:developer';
+import 'dart:async';
 import 'dart:ui';
-
 import 'package:first_flutter_project/enemy/enemy.dart';
 import 'package:first_flutter_project/models/player_data.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
@@ -19,9 +18,17 @@ class Skeleton extends SpriteAnimationComponent
   final PlayerData playerData;
 
   bool _isSkeletonHit = false;
+
   final Timer _hitTimer = Timer(1);
+
   final rectHitBoxBorder = BasicPalette.darkRed.paint()
     ..style = PaintingStyle.stroke;
+
+  final attackHitBoxBorder = BasicPalette.darkGreen.paint()
+    ..style = PaintingStyle.stroke;
+
+  late final PolygonHitbox _walkHitBox;
+  late final PolygonHitbox _attackHitBox;
 
   Skeleton({
     required this.skeletonWalkImage,
@@ -30,6 +37,29 @@ class Skeleton extends SpriteAnimationComponent
     required this.skeletonDeadImage,
     required this.playerData,
   });
+
+  @override
+  FutureOr<void> onLoad() {
+    _walkHitBox = PolygonHitbox.relative([
+      Vector2(0, 1), // Middle of top wall
+      Vector2(1, 0), // Middle of right wall
+      Vector2(0, -1), // Middle of bottom wall
+      Vector2(-1, 0), // Middle of left wall
+    ], parentSize: size)
+      ..renderShape = true
+      ..paint = rectHitBoxBorder;
+
+    _attackHitBox = PolygonHitbox.relative([
+      Vector2(0, 1), // Middle of top wall
+      Vector2(1, 0), // Middle of right wall
+      Vector2(0, -1), // Middle of bottom wall
+      Vector2(-1, 0), // Middle of left wall
+    ], parentSize: size)
+      ..renderShape = true
+      ..paint = attackHitBoxBorder;
+
+    return super.onLoad();
+  }
 
   @override
   void onMount() {
@@ -44,17 +74,28 @@ class Skeleton extends SpriteAnimationComponent
       _isSkeletonHit = false;
     };
 
-    // Add a hitBox
-    add(
-      PolygonHitbox.relative([
-        Vector2(0, 1), // Middle of top wall
-        Vector2(1, 0), // Middle of right wall
-        Vector2(0, -1), // Middle of bottom wall
-        Vector2(-1, 0), // Middle of left wall
-      ], parentSize: size)
-        ..renderShape = true
-        ..paint = rectHitBoxBorder,
-    );
+    // When converted to a variable
+    // component is NOT inflating to the UI
+    // Not- Working ❌
+    if (!game.isSkeletonAttacking) {
+      add(_attackHitBox);
+      remove(_walkHitBox);
+    } else {
+      add(_walkHitBox);
+      remove(_attackHitBox);
+    }
+
+    // This adding up the component is inflating to the UI
+    // Working ✅
+    add(PolygonHitbox.relative([
+      Vector2(0, 1), // Middle of top wall
+      Vector2(1, 0), // Middle of right wall
+      Vector2(0, -1), // Middle of bottom wall
+      Vector2(-1, 0), // Middle of left wall
+    ], parentSize: size)
+      ..renderShape = true
+      ..paint = rectHitBoxBorder);
+
     super.onMount();
   }
 
@@ -101,7 +142,7 @@ class Skeleton extends SpriteAnimationComponent
   @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollision(intersectionPoints, other);
+    super.onCollisionStart(intersectionPoints, other);
     if ((other is Enemy && !_isSkeletonHit)) {
       _hitDetected();
     }

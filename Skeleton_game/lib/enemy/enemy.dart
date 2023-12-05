@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:first_flutter_project/models/enemy_data.dart';
+import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -54,5 +55,13 @@ class Enemy extends SpriteAnimationComponent
       game.playerData.currentScore += 1;
     }
     super.update(dt);
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+    if((other is Skeleton) && game.isSkeletonAttacking){
+      removeFromParent();
+    }
   }
 }
