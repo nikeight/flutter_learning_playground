@@ -1,3 +1,4 @@
+import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 
@@ -7,7 +8,6 @@ part 'player_data.g.dart';
 /// Lives and current score reset everytime
 @HiveType(typeId: 0)
 class PlayerData extends ChangeNotifier with HiveObjectMixin {
-
   static const String playerDataHiveKey = 'player_data';
 
   @HiveField(0)
@@ -33,6 +33,16 @@ class PlayerData extends ChangeNotifier with HiveObjectMixin {
     if (highScore < _currentScore) {
       highScore = _currentScore;
     }
+    notifyListeners();
+    save();
+  }
+
+  SkeletonState _currentState = SkeletonState.walk;
+
+  SkeletonState get currentState => _currentState;
+
+  set currentState(SkeletonState newState) {
+    _currentState = newState;
     notifyListeners();
     save();
   }

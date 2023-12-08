@@ -33,10 +33,11 @@ class MainMenuOverLay extends StatelessWidget {
                 spacing: 10,
                 children: [
                   const Text(
-                    'Survive Skeleton Walk',
+                    'Skeleton Walk',
                     style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.white,
+                        fontSize: 50,
+                        color: Colors.white,
+                        fontFamily: 'BlackShepherd',
                     ),
                   ),
                   ElevatedButton(
@@ -47,9 +48,8 @@ class MainMenuOverLay extends StatelessWidget {
                     },
                     child: const Text(
                       'Play',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
+                      style:
+                          TextStyle(fontSize: 30, fontFamily: 'BlackShepherd'),
                     ),
                   ),
                   ElevatedButton(
@@ -59,9 +59,8 @@ class MainMenuOverLay extends StatelessWidget {
                     },
                     child: const Text(
                       'Settings',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
+                      style:
+                          TextStyle(fontSize: 30, fontFamily: 'BlackShepherd'),
                     ),
                   ),
                 ],

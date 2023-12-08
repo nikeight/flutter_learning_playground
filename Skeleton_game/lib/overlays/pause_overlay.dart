@@ -41,7 +41,9 @@ class PauseOverlay extends StatelessWidget {
                         child: Text(
                           'Score: $currentScore',
                           style: const TextStyle(
-                              fontSize: 40, color: Colors.white),
+                              fontSize: 40,
+                              color: Colors.white,
+                              fontFamily: 'BlackShepherd'),
                         ),
                       ),
                     ),
@@ -55,8 +57,7 @@ class PauseOverlay extends StatelessWidget {
                       child: const Text(
                         'Resume',
                         style: TextStyle(
-                          fontSize: 30,
-                        ),
+                            fontSize: 30, fontFamily: 'BlackShepherd'),
                       ),
                     ),
                     ElevatedButton(
@@ -69,8 +70,7 @@ class PauseOverlay extends StatelessWidget {
                       child: const Text(
                         'Restart',
                         style: TextStyle(
-                          fontSize: 30,
-                        ),
+                            fontSize: 30, fontFamily: 'BlackShepherd'),
                       ),
                     ),
                     ElevatedButton(
@@ -79,13 +79,14 @@ class PauseOverlay extends StatelessWidget {
                         skeletonGameRef.overlays.add(MainMenuOverLay.id);
                         skeletonGameRef.resumeEngine();
                         skeletonGameRef.reset();
+                        skeletonGameRef.playerData.currentScore = 0;
+                        skeletonGameRef.playerData.lives = 5;
                         // AudioManager.instance.resumeBgm();
                       },
                       child: const Text(
                         'Exit',
                         style: TextStyle(
-                          fontSize: 30,
-                        ),
+                            fontSize: 30, fontFamily: 'BlackShepherd'),
                       ),
                     ),
                   ],

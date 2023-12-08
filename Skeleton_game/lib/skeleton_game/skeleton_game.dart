@@ -4,7 +4,6 @@ import 'package:first_flutter_project/models/settings_data.dart';
 import 'package:first_flutter_project/overlays/game_hud.dart';
 import 'package:first_flutter_project/overlays/game_over_overlay.dart';
 import 'package:first_flutter_project/overlays/pause_overlay.dart';
-import 'package:first_flutter_project/skeleton_game/flame_game_audio_manager.dart';
 import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -29,8 +28,6 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   late PlayerData playerData;
   late SettingsData settingsData;
   final EnemyManager _enemyManager = EnemyManager();
-  final Timer _attackAnimationTimer = Timer(1.5);
-
   bool isSkeletonAttacking = false;
 
   @override
@@ -40,9 +37,6 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
 
     // Cache Load images
     await images.loadAll(_imageAssets);
-
-    // Avoid the timer to start
-    _attackAnimationTimer.pause();
 
     // Setup the Hive Boxes
     playerData = await _readPlayerData();
@@ -68,23 +62,10 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   }
 
   @override
-  void mount() {
-    _attackAnimationTimer.onTick = () {
-      _skeleton.animation = _skeleton.walkAnimation();
-      isSkeletonAttacking = false;
-    };
-    super.mount();
-  }
-
-  @override
-  void update(double dt) {
-    super.update(dt);
-    _attackAnimationTimer.update(dt);
-  }
-
-  @override
   void onTapDown(TapDownInfo info) {
-    _attackSkeletonAction();
+    _skeleton.current = SkeletonState.attack;
+    isSkeletonAttacking = true;
+    _skeleton.updateCollisionTypeForAttackCurrent();
     super.onTapDown(info);
   }
 
@@ -115,21 +96,49 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
     super.lifecycleStateChange(state);
   }
 
-  void _attackSkeletonAction() {
-    isSkeletonAttacking = true;
-    _skeleton.animation = _skeleton.attackAnimation();
-    _attackAnimationTimer.start();
-  }
-
   void startGame() {
     _skeleton = Skeleton(
-        skeletonWalkImage: images.fromCache('skeleton_stripes/walk.png'),
-        skeletonHitImage: images.fromCache('skeleton_stripes/hit.png'),
-        skeletonAttackImage: images.fromCache('skeleton_stripes/attack.png'),
-        skeletonDeadImage: images.fromCache('skeleton_stripes/dead.png'),
-        playerData: playerData);
-
-    // _enemyManager = EnemyManager(images.fromCache('enemy_stripes/ghoul_run.png'));
+      playerData: playerData,
+      animations: {
+        SkeletonState.walk: SpriteAnimation.fromFrameData(
+          images.fromCache('skeleton_stripes/walk.png'),
+          SpriteAnimationData.sequenced(
+            amount: 12,
+            stepTime: 0.1,
+            textureSize: Vector2(22, 33),
+            // texturePosition: Vector2(22, 0),
+          ),
+        ),
+        SkeletonState.hit: SpriteAnimation.fromFrameData(
+          images.fromCache('skeleton_stripes/hit.png'),
+          SpriteAnimationData.sequenced(
+              amount: 7,
+              stepTime: 0.25,
+              textureSize: Vector2(30, 32),
+              texturePosition: Vector2(-60, 0),
+              loop: false),
+        ),
+        SkeletonState.attack: SpriteAnimation.fromFrameData(
+          images.fromCache('skeleton_stripes/attack.png'),
+          SpriteAnimationData.sequenced(
+              amount: 14,
+              stepTime: 0.1,
+              textureSize: Vector2(43, 37),
+              texturePosition: Vector2(43, 2),
+              loop: false),
+        ),
+        SkeletonState.dead: SpriteAnimation.fromFrameData(
+          images.fromCache('skeleton_stripes/dead.png'),
+          SpriteAnimationData.sequenced(
+              amount: 14,
+              stepTime: 0.1,
+              textureSize: Vector2(33, 33),
+              texturePosition: Vector2(33, 0),
+              loop: false),
+        )
+      },
+      current: SkeletonState.walk,
+    );
 
     add(_skeleton);
     add(_enemyManager);

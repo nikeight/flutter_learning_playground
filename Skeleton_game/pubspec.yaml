@@ -31,8 +31,11 @@ flutter:
     - assets/images/background/
     - assets/images/skeleton_stripes/
     - assets/images/enemy_stripes/
-
+    - assets/images/other/
   fonts:
     - family: Audiowide
       fonts:
         - asset: assets/fonts/Audiowide/Audiowide-Regular.ttf
+    - family: BlackShepherd
+      fonts:
+        - asset: assets/fonts/shepherd/Black-Shepherd.otf

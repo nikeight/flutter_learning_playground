@@ -12,7 +12,7 @@ import 'package:flame/palette.dart';
 class Enemy extends SpriteAnimationComponent
     with CollisionCallbacks, HasGameReference<SkeletonGame> {
   final EnemyData enemyData;
-  final rectHitBoxBorder = BasicPalette.darkRed.paint()
+  final rectHitBoxBorder = BasicPalette.darkPink.paint()
     ..style = PaintingStyle.stroke;
 
   Enemy(this.enemyData) {
@@ -30,9 +30,14 @@ class Enemy extends SpriteAnimationComponent
   @override
   FutureOr<void> onLoad() {
     // Adding a Rectangle Around the enemy
-    add(RectangleHitbox.relative(Vector2.all(0.9), parentSize: size)
+    add(
+        RectangleHitbox.relative(
+            Vector2.all(0.9),
+            parentSize: size,
+        )
       ..paint = rectHitBoxBorder
-      ..renderShape = true);
+      ..renderShape = false,
+    );
     return super.onLoad();
   }
 
@@ -60,7 +65,9 @@ class Enemy extends SpriteAnimationComponent
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
-    if((other is Skeleton) && game.isSkeletonAttacking){
+    if ((other is Skeleton) &&
+        game.playerData.currentState == SkeletonState.attack) {
+      game.playerData.currentScore += 1;
       removeFromParent();
     }
   }

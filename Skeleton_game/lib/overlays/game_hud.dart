@@ -33,16 +33,40 @@ class GameHud extends StatelessWidget {
                 return Row(
                   children: List.generate(5, (index) {
                     if (index < lives) {
-                      return const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 2),
+                        child: Image(
+                          image:
+                              AssetImage('assets/images/other/skull_life.png'),
+                          width: 18,
+                          height: 18,
+                        ),
                       );
                     } else {
-                      return const Icon(
-                        Icons.favorite_border,
-                        color: Colors.red,
+                      return const SizedBox(
+                        width: 16,
+                        height: 16,
                       );
                     }
+                    // if (index < lives) {
+                    //   return const Padding(
+                    //     padding: EdgeInsets.symmetric(horizontal: 1),
+                    //     child:  Image(
+                    //       image: AssetImage('assets/images/other/skull_active.png'),
+                    //       width: 16,
+                    //       height: 16,
+                    //     ),
+                    //   );
+                    // } else {
+                    //   return const Padding(
+                    //     padding: EdgeInsets.symmetric(horizontal: 1),
+                    //     child:  Image(
+                    //       image: AssetImage('assets/images/other/skull_inactive.png'),
+                    //       width: 16,
+                    //       height: 16,
+                    //     ),
+                    //   );
+                    // }
                   }),
                 );
               },
@@ -50,13 +74,21 @@ class GameHud extends StatelessWidget {
             Selector<PlayerData, int>(
               selector: (_, playerData) => playerData.currentScore,
               builder: (_, currentScore, __) {
-                return Text("Current Score : $currentScore");
+                return Text(
+                  "Current Score : $currentScore",
+                  style: const TextStyle(
+                      fontSize: 18, fontFamily: 'BlackShepherd'),
+                );
               },
             ),
             Selector<PlayerData, int>(
               selector: (_, playerData) => playerData.highScore,
               builder: (_, highScore, __) {
-                return Text("Highest Score : $highScore");
+                return Text(
+                  "Highest Score : $highScore",
+                  style: const TextStyle(
+                      fontSize: 18, fontFamily: 'BlackShepherd'),
+                );
               },
             ),
             TextButton(

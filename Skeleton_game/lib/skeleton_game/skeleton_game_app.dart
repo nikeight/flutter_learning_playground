@@ -15,7 +15,21 @@ class SkeletonGameApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Audiowide'),
+      theme: ThemeData(
+        textTheme: Theme.of(context).textTheme.apply(
+              fontFamily: 'BlackShepherd',
+              bodyColor: Colors.white,
+              displayColor: Colors.white,
+            ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        // Settings up some default theme for elevated buttons.
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            fixedSize: const Size(200, 60),
+          ),
+        ),
+      ),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
