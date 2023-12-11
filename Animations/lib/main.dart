@@ -16,6 +16,7 @@ class AnimationApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Animation',
       theme: ThemeData(
+        fontFamily: 'Montserrat',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),

@@ -1,3 +1,6 @@
+import 'package:animations/explicit/example_explicit.dart';
+import 'package:animations/implicit/example_custom_implicit.dart';
+import 'package:animations/implicit/example_implicit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,18 +11,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageController pageViewController = PageController();
     return CallbackShortcuts(
-      bindings:  <ShortcutActivator, VoidCallback>{
+      bindings: <ShortcutActivator, VoidCallback>{
         const SingleActivator(LogicalKeyboardKey.arrowRight): () {
           pageViewController.nextPage(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeIn
-          );
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeIn);
         },
         const SingleActivator(LogicalKeyboardKey.arrowLeft): () {
           pageViewController.previousPage(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeIn
-          );
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeIn);
         },
       },
       child: Focus(
@@ -30,12 +31,9 @@ class HomeScreen extends StatelessWidget {
             Center(
               child: Text('First Page'),
             ),
-            Center(
-              child: Text('Second Page'),
-            ),
-            Center(
-              child: Text('Third Page'),
-            ),
+            ImplicitExample(),
+            CustomImplicitExample(),
+            ExplicitExample(),
           ],
         ),
       ),
