@@ -1,8 +1,11 @@
+import 'package:animations/explicit/example_custom_explicit.dart';
 import 'package:animations/explicit/example_explicit.dart';
 import 'package:animations/implicit/example_custom_implicit.dart';
 import 'package:animations/implicit/example_implicit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'explicit/batman_cutout.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,6 +37,8 @@ class HomeScreen extends StatelessWidget {
             ImplicitExample(),
             CustomImplicitExample(),
             ExplicitExample(),
+            CustomExplicit(),
+            BatmanCutOut(),
           ],
         ),
       ),

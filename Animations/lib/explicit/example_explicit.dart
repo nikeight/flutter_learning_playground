@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// Performance tips
+/// Create the Controller in the Init State to avoid creating Controller multiple times
+/// Also Dispose method is necessary to avoid any Memory leakage
+///
 class ExplicitExample extends StatefulWidget {
   const ExplicitExample({super.key});
 
@@ -15,15 +19,23 @@ class _ExplicitExampleState extends State<ExplicitExample>
   late Animation<double> _rotationAnimation;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     // Init Controller
     _rotationController = AnimationController(
-      vsync: this,
       duration: const Duration(seconds: 4),
-    );
+      vsync: this,
+    )
+      ..forward()
+      ..repeat();
+    super.initState();
+  }
 
-    _rotationAnimation = Tween<double>(begin: 0.0, end: (pi * 6.0)).animate(
-        CurvedAnimation(parent: _rotationController, curve: Curves.easeInToLinear));
+  @override
+  Widget build(BuildContext context) {
+    // Init Animation
+    _rotationAnimation = Tween<double>(begin: 0.0, end: (pi * 4.0)).animate(
+        CurvedAnimation(
+            parent: _rotationController, curve: Curves.easeInToLinear));
 
     return Center(
       child: AnimatedBuilder(
@@ -33,8 +45,9 @@ class _ExplicitExampleState extends State<ExplicitExample>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Transform.rotate(
-                angle: _rotationAnimation.value,
+              RotationTransition(
+                turns: _rotationAnimation,
+                alignment: Alignment.center,
                 child: Image.asset(
                   'assets/image/flash_logo.png',
                   width: 100,
@@ -44,7 +57,6 @@ class _ExplicitExampleState extends State<ExplicitExample>
               ElevatedButton(
                   onPressed: () {
                     _rotationController.forward();
-                    _rotationController.repeat();
                   },
                   child: const Text("Play")),
               ElevatedButton(
