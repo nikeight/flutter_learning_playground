@@ -1,5 +1,6 @@
 import 'package:animations/explicit/example_custom_explicit.dart';
 import 'package:animations/explicit/example_explicit.dart';
+import 'package:animations/hero/example_hero_animation.dart';
 import 'package:animations/implicit/example_custom_implicit.dart';
 import 'package:animations/implicit/example_implicit.dart';
 import 'package:flutter/material.dart';
@@ -30,15 +31,16 @@ class HomeScreen extends StatelessWidget {
         autofocus: true,
         child: PageView(
           controller: pageViewController,
-          children: const <Widget>[
-            Center(
+          children: <Widget>[
+            HeroAnimation(),
+            const Center(
               child: Text('First Page'),
             ),
-            ImplicitExample(),
-            CustomImplicitExample(),
-            ExplicitExample(),
-            CustomExplicit(),
-            BatmanCutOut(),
+            const ImplicitExample(),
+            const CustomImplicitExample(),
+            const ExplicitExample(),
+            const CustomExplicit(),
+            const BatmanCutOut(),
           ],
         ),
       ),
