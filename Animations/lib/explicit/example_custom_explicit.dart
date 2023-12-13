@@ -13,6 +13,12 @@ class _CustomExplicitState extends State<CustomExplicit>
   late final AnimationController _beamAnimationController;
 
   @override
+  void dispose() {
+    _beamAnimationController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     _beamAnimationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 5))
