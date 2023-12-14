@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'explicit/batman_cutout.dart';
+import 'navigation/example_navigation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,15 +33,16 @@ class HomeScreen extends StatelessWidget {
         child: PageView(
           controller: pageViewController,
           children: <Widget>[
-            HeroAnimation(),
+            const CustomExplicit(),
             const Center(
               child: Text('First Page'),
             ),
             const ImplicitExample(),
             const CustomImplicitExample(),
             const ExplicitExample(),
-            const CustomExplicit(),
             const BatmanCutOut(),
+            HeroAnimation(),
+            const NavigationExampleScreen(),
           ],
         ),
       ),

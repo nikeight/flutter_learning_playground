@@ -43,3 +43,12 @@ class DcTeam {
 
   DcTeam(this.teamName, this.imageAsset);
 }
+
+class SuperHero {
+  final String name;
+  final String iconImageAsset;
+  final String heroImageAsset;
+  final Offset offset;
+
+  SuperHero(this.name, this.iconImageAsset, this.heroImageAsset, this.offset);
+}

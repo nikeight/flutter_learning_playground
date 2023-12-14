@@ -15,7 +15,7 @@ class HeroAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 5;
+    timeDilation = 1;
     final gridItemViewWidth = MediaQuery.of(context).size.width / 2;
 
     return Center(

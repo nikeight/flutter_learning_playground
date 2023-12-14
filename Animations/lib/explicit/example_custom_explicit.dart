@@ -1,3 +1,4 @@
+import 'package:animations/explicit/batman_cutout.dart';
 import 'package:animations/explicit/clip_arc_test.dart';
 import 'package:flutter/material.dart';
 
@@ -46,26 +47,64 @@ class _CustomExplicitState extends State<CustomExplicit>
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
+                    begin: Alignment.topLeft,
+                    end: Alignment.topRight,
                     colors: const [
                       Colors.white,
-                      Colors.white70,
-                      Colors.white54,
                       Colors.transparent,
                     ],
-                    stops: [
-                      _beamAnimationController.value * 0.15,
-                      _beamAnimationController.value * 0.25,
-                      _beamAnimationController.value * 0.50,
-                      _beamAnimationController.value
-                    ],
+                    stops: [0, _beamAnimationController.value],
                   ),
                 ),
               ),
             );
           },
-        )
+        ),
+        Positioned(
+          left: MediaQuery.of(context).size.width * 0.6,
+          top: MediaQuery.of(context).size.height * 0.05,
+          child: Stack(
+            children: [
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..rotateZ(-15),
+                child: CustomPaint(
+                  painter: OvalLightForeground(),
+                  child: const SizedBox(
+                    width: 200,
+                    height: 150,
+                  ),
+                ),
+              ),
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..rotateZ(1),
+                child: const CustomPaint(
+                  painter: BatmanLogo(),
+                  child: SizedBox(
+                    width: 200,
+                    height: 100,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Positioned(
+        //   left: MediaQuery.of(context).size.width * 0.6,
+        //   top: MediaQuery.of(context).size.height * 0.05,
+        //   child: Transform(
+        //     alignment: Alignment.center,
+        //     transform: Matrix4.identity()..rotateZ(1),
+        //     child: const CustomPaint(
+        //       painter: BatmanLogo(),
+        //       child: SizedBox(
+        //         width: 200,
+        //         height: 100,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

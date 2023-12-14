@@ -59,11 +59,11 @@ class OvalLightForeground extends CustomPainter{
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    var rectangle = Rect.fromCenter(center: center, width: 300.0, height: 200.0);
+    var rectangle = Rect.fromCenter(center: center, width: 220.0, height: 120.0);
 
     final paint = Paint()
       ..color = Colors.white60..style = PaintingStyle.fill
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15.0);
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10.0);
 
     canvas.drawOval(rectangle, paint);
   }

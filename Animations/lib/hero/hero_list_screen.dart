@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 
 class HeroListScreen extends StatelessWidget {
   final DcTeam team;
+  final heroList = [
+    SuperHero('Batman', '', '', Offset.zero),
+    SuperHero('Superman', '', '', Offset.zero),
+    SuperHero('Flash', '', '', Offset.zero),
+  ];
 
-  const HeroListScreen({super.key, required this.team});
+  HeroListScreen({super.key, required this.team});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +56,26 @@ class HeroListScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
-        child: Text('Hero Animation working fine or not?'),
+      body: ListView.builder(
+        itemCount: heroList.length,
+        itemBuilder: (context, index) {
+          final indexHero = heroList[index];
+          return ListTile(
+            onTap: () {
+              // Do Nothing
+            },
+            leading: Hero(
+              tag: indexHero.name,
+              child: const Icon(
+                Icons.headphones_rounded,
+              ),
+            ),
+            title: Text(indexHero.name),
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+            ),
+          );
+        },
       ),
     );
   }
