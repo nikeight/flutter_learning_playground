@@ -8,7 +8,14 @@ class NavigationExampleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Navigation Example'),
+        title: const Text(
+          'Navigation Example',
+          style: TextStyle(
+            color: Colors.black54,
+            fontWeight: FontWeight.normal,
+            fontSize: 36,
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -18,10 +25,10 @@ class NavigationExampleScreen extends StatelessWidget {
             ),
           );
         },
-        child: const Icon(
+        child: Icon(
           Icons.play_circle,
-          size: 16,
-          color: Colors.blue,
+          size: 24,
+          color: Colors.purple.shade400,
         ),
       ),
       body: const Center(

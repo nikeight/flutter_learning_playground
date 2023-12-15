@@ -1,42 +1,5 @@
 import 'package:flutter/material.dart';
 
-class BatmanCutOut extends StatefulWidget {
-  const BatmanCutOut({super.key});
-
-  @override
-  State<BatmanCutOut> createState() => _BatmanCutOutState();
-}
-
-class _BatmanCutOutState extends State<BatmanCutOut> {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          CustomPaint(
-            painter: OvalLightForeground(),
-            child: SizedBox(
-              width: 250,
-              height: 180,
-            ),
-          ),
-          PositionedDirectional(
-            bottom: 25,
-            child: CustomPaint(
-              painter: BatmanLogo(),
-              child: SizedBox(
-                width: 200,
-                height: 100,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class BatmanLogo extends CustomPainter {
   const BatmanLogo();
 

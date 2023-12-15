@@ -19,15 +19,77 @@ class _ImplicitExampleState extends State<ImplicitExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Implicit Animation',
+            style: TextStyle(
+              color: Colors.black54,
+              fontWeight: FontWeight.normal,
+              fontSize: 36,
+            )
+        ),
+      ),
       body: Center(
-        child: AnimatedRotation(
-          turns: turns,
-          duration: const Duration(seconds: 3),
-          child: Image.asset(
-            'assets/image/flash_logo.png',
-            width: 100,
-            height: 100,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedRotation(
+              turns: turns,
+              duration: const Duration(seconds: 3),
+              child: Image.asset(
+                'assets/image/flash_logo.png',
+                width: 200,
+                height: 200,
+              ),
+            ),
+            const SizedBox(height: 40),
+            const Text(
+              '⦿ Easy to Start',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⦿ Control by framework',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⦿ Need initial and final values',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⦿ Initial values remain same, final value changes',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⭐️ Support AnimatedFoo ',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -36,7 +98,7 @@ class _ImplicitExampleState extends State<ImplicitExample> {
             turns = 10.0 * random.nextDouble();
           });
         },
-        child:  const Icon(Icons.play_arrow),
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }

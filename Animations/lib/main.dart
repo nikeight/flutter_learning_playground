@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animations/home_screen.dart';
 
 Future<void> main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const AnimationApp());
 }
 

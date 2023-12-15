@@ -1,11 +1,8 @@
 import 'package:animations/hero/hero_list_screen.dart';
 import 'package:animations/hero/team_card_view.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/scheduler.dart' show timeDilation;
 
 class HeroAnimation extends StatelessWidget {
-  HeroAnimation({super.key});
-
   final teamList = [
     DcTeam('WM', 'assets/image/watchmen_logo.png',
         'assets/image/watch_men_team.jpg'),
@@ -17,14 +14,22 @@ class HeroAnimation extends StatelessWidget {
         'assets/image/justice_league_team.jpeg'),
   ];
 
+  HeroAnimation({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // timeDilation = 1;
     final gridItemViewWidth = MediaQuery.of(context).size.width / 2;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hero Animation'),
+        title: const Text(
+          'Hero Animation',
+          style: TextStyle(
+            color: Colors.black54,
+            fontWeight: FontWeight.normal,
+            fontSize: 36,
+          ),
+        ),
       ),
       body: Center(
         child: SizedBox(

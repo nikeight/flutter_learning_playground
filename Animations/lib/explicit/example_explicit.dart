@@ -34,11 +34,99 @@ class _ExplicitExampleState extends State<ExplicitExample>
   @override
   Widget build(BuildContext context) {
     // Init Animation
-    _rotationAnimation = Tween<double>(begin: 0.0, end: (pi * 4.0)).animate(
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 3.0).animate(
         CurvedAnimation(
-            parent: _rotationController, curve: Curves.easeInToLinear));
+            parent: _rotationController,
+            curve: Curves.fastEaseInToSlowEaseOut));
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Explicit Animation',
+          style: TextStyle(
+            color: Colors.black54,
+            fontWeight: FontWeight.normal,
+            fontSize: 36,
+          ),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedBuilder(
+              animation: _rotationAnimation,
+              builder: (context, child) {
+                return RotationTransition(
+                  turns: _rotationAnimation,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/image/flash_logo.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 40),
+            const Text(
+              '⦿ Repeat Animation',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⦿ Steps/Stages based ',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⦿ Controlled by Developers, Through AnimationController',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⦿ Built under AnimatedBuilder',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⭐️ Takes Animation<Double> type values',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '⭐️ Support FooTransition ',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
+      ),
       floatingActionButton: SpeedDial(
         animatedIcon: AnimatedIcons.menu_arrow,
         direction: SpeedDialDirection.up,
@@ -54,7 +142,9 @@ class _ExplicitExampleState extends State<ExplicitExample>
               child: const Icon(Icons.play_circle),
               label: 'Play',
               onTap: () {
-                _rotationController.forward();
+                _rotationController
+                  ..forward()
+                  ..repeat();
               }),
           SpeedDialChild(
               child: const Icon(Icons.pause_circle),
@@ -63,28 +153,6 @@ class _ExplicitExampleState extends State<ExplicitExample>
                 _rotationController.stop();
               }),
         ],
-      ),
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _rotationAnimation,
-          builder: (context, child) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                RotationTransition(
-                  turns: _rotationAnimation,
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/image/flash_logo.png',
-                    width: 100,
-                    height: 100,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
       ),
     );
   }

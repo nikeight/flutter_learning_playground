@@ -1,17 +1,15 @@
-import 'dart:math';
-
-import 'package:animations/explicit/batman_cutout.dart';
-import 'package:animations/explicit/clip_arc_test.dart';
+import 'package:animations/explicit/batman_painter.dart';
+import 'package:animations/explicit/spotlight_clipper.dart';
 import 'package:flutter/material.dart';
 
-class CustomExplicit extends StatefulWidget {
-  const CustomExplicit({super.key});
+class BatSignalExplicitAnimation extends StatefulWidget {
+  const BatSignalExplicitAnimation({super.key});
 
   @override
-  State<CustomExplicit> createState() => _CustomExplicitState();
+  State<BatSignalExplicitAnimation> createState() => _BatSignalExplicitAnimationState();
 }
 
-class _CustomExplicitState extends State<CustomExplicit>
+class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
     with TickerProviderStateMixin {
   late final AnimationController _beamAnimationController;
   double opacity = 0.0;

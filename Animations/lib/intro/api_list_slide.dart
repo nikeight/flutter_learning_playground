@@ -9,6 +9,17 @@ class ApiListSlide extends StatefulWidget {
 
 class _ApiListSlideState extends State<ApiListSlide> {
   final ScrollController _scrollController = ScrollController();
+  List<String> apiList = [
+    'Implicit Animations',
+    'Explicit Animations',
+    'Hero Animations',
+    'Navigation Animations',
+    'Text Animations',
+    'AnimationWidget Animations',
+    'AnimationBuilder Animations',
+    'CustomPainter Animations',
+    'CustomClipper Animations',
+  ];
 
   @override
   void dispose() {
@@ -99,15 +110,3 @@ class ApiListWidget extends StatelessWidget {
     );
   }
 }
-
-List<String> apiList = [
-  'Implicit Animations',
-  'Explicit Animations',
-  'Hero Animations',
-  'Navigation Animations',
-  'Text Animations',
-  'AnimationWidget Animations',
-  'AnimationBuilder Animations',
-  'CustomPainter Animations',
-  'CustomClipper Animations',
-];

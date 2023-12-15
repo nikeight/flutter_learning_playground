@@ -1,4 +1,5 @@
-import 'package:animations/explicit/example_custom_explicit.dart';
+import 'package:animations/explicit/bat_signal_animation.dart';
+import 'package:animations/explicit/custom_explicit_slide.dart';
 import 'package:animations/explicit/example_explicit.dart';
 import 'package:animations/hero/example_hero_animation.dart';
 import 'package:animations/implicit/example_custom_implicit.dart';
@@ -9,7 +10,9 @@ import 'package:animations/intro/introduction_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'explicit/batman_cutout.dart';
+import 'explicit/batman_painter.dart';
+import 'hero/team_card_view.dart';
+import 'intro/talk_start_slide.dart';
 import 'navigation/example_navigation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,15 +41,13 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             const AnimatedTitleSlide(),
             const IntroductionSlide(),
-            const ApiListSlide(),
-            const CustomExplicit(),
-            const Center(
-              child: Text('First Page'),
-            ),
+            // const ApiListSlide(),
+            const TopicStartSlide(),
             const ImplicitExample(),
             const CustomImplicitExample(),
             const ExplicitExample(),
-            const BatmanCutOut(),
+            const BatSignalExplicitAnimation(),
+            const CustomExplicitSlide(),
             HeroAnimation(),
             const NavigationExampleScreen(),
           ],
