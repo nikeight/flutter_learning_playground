@@ -10,13 +10,28 @@ class BatmanCutOut extends StatefulWidget {
 class _BatmanCutOutState extends State<BatmanCutOut> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CustomPaint(
-        painter: OvalLightForeground(),
-        child: const SizedBox(
-          width: 300,
-          height: 150,
-        ),
+    return const Center(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomPaint(
+            painter: OvalLightForeground(),
+            child: SizedBox(
+              width: 250,
+              height: 180,
+            ),
+          ),
+          PositionedDirectional(
+            bottom: 25,
+            child: CustomPaint(
+              painter: BatmanLogo(),
+              child: SizedBox(
+                width: 200,
+                height: 100,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -28,10 +43,10 @@ class BatmanLogo extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.red
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 2;
+      ..color = Colors.black
+      ..style = PaintingStyle.fill
+      ..strokeCap = StrokeCap.butt
+      ..strokeWidth = 4;
 
     final path = Path()
       ..moveTo(100, 100)
@@ -55,14 +70,18 @@ class BatmanLogo extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-class OvalLightForeground extends CustomPainter{
+class OvalLightForeground extends CustomPainter {
+  const OvalLightForeground();
+
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    var rectangle = Rect.fromCenter(center: center, width: 220.0, height: 120.0);
+    var rectangle =
+        Rect.fromCenter(center: center, width: 250.0, height: 180.0);
 
     final paint = Paint()
-      ..color = Colors.white60..style = PaintingStyle.fill
+      ..color = Colors.white
+      ..style = PaintingStyle.fill
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10.0);
 
     canvas.drawOval(rectangle, paint);

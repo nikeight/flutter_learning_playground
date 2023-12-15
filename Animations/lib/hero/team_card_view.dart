@@ -16,21 +16,13 @@ class TeamCardView extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.all(4),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              teamInfo.imageAsset,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-            ),
-            Text(
-              teamInfo.teamName,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            )
-          ],
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.asset(
+            teamInfo.logoAsset,
+          ),
         ),
       ),
     );
@@ -39,9 +31,14 @@ class TeamCardView extends StatelessWidget {
 
 class DcTeam {
   final String teamName;
+  final String logoAsset;
   final String imageAsset;
 
-  DcTeam(this.teamName, this.imageAsset);
+  DcTeam(
+    this.teamName,
+    this.logoAsset,
+    this.imageAsset,
+  );
 }
 
 class SuperHero {

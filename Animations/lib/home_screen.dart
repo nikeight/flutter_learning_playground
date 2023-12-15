@@ -3,6 +3,9 @@ import 'package:animations/explicit/example_explicit.dart';
 import 'package:animations/hero/example_hero_animation.dart';
 import 'package:animations/implicit/example_custom_implicit.dart';
 import 'package:animations/implicit/example_implicit.dart';
+import 'package:animations/intro/animated_title_slide.dart';
+import 'package:animations/intro/api_list_slide.dart';
+import 'package:animations/intro/introduction_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,6 +36,9 @@ class HomeScreen extends StatelessWidget {
         child: PageView(
           controller: pageViewController,
           children: <Widget>[
+            const AnimatedTitleSlide(),
+            const IntroductionSlide(),
+            const ApiListSlide(),
             const CustomExplicit(),
             const Center(
               child: Text('First Page'),

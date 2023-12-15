@@ -11,6 +11,19 @@ class CustomImplicitExample extends StatefulWidget {
 
 class _CustomImplicitExampleState extends State<CustomImplicitExample> {
   double percentage = 0.1;
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    focusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,28 +32,42 @@ class _CustomImplicitExampleState extends State<CustomImplicitExample> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TweenAnimationBuilder(
-            tween: Tween(begin: 0.1, end: percentage),
-            duration: const Duration(seconds: 2),
-            builder: (_, double newPercentage, __) {
-              return Transform.rotate(
-                angle: pi * 4 * newPercentage,
-                child: Image.asset(
-                  'assets/image/flash_logo.png',
-                  width: 100,
-                  height: 100,
-                  opacity: AlwaysStoppedAnimation(newPercentage),
-                ),
-              );
+          GestureDetector(
+            onTap: () {
+              focusNode.canRequestFocus = false;
             },
+            child: TweenAnimationBuilder(
+              tween: Tween(begin: 0.1, end: percentage),
+              duration: const Duration(seconds: 2),
+              builder: (_, double newPercentage, __) {
+                return Transform.rotate(
+                  angle: pi * 4 * newPercentage,
+                  child: Image.asset(
+                    'assets/image/flash_logo.png',
+                    width: 100,
+                    height: 100,
+                    opacity: AlwaysStoppedAnimation(newPercentage),
+                  ),
+                );
+              },
+            ),
           ),
-          Slider.adaptive(
-            value: percentage,
-            onChanged: (double newValue) {
-              setState(() {
-                percentage = newValue;
-              });
-            },
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: Slider(
+              allowedInteraction: SliderInteraction.tapOnly,
+              activeColor: Colors.redAccent.shade200,
+              inactiveColor: Colors.yellow.shade300,
+              thumbColor: Colors.black,
+              value: percentage,
+              focusNode: focusNode,
+              onChanged: (double newValue) {
+                focusNode.canRequestFocus = true;
+                setState(() {
+                  percentage = newValue;
+                });
+              },
+            ),
           )
         ],
       ),

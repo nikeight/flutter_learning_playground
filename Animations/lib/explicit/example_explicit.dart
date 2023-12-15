@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 /// Performance tips
 /// Create the Controller in the Init State to avoid creating Controller multiple times
@@ -37,41 +38,53 @@ class _ExplicitExampleState extends State<ExplicitExample>
         CurvedAnimation(
             parent: _rotationController, curve: Curves.easeInToLinear));
 
-    return Center(
-      child: AnimatedBuilder(
-        animation: _rotationAnimation,
-        builder: (context, child) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              RotationTransition(
-                turns: _rotationAnimation,
-                alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/image/flash_logo.png',
-                  width: 100,
-                  height: 100,
+    return Scaffold(
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_arrow,
+        direction: SpeedDialDirection.up,
+        spaceBetweenChildren: 16,
+        children: [
+          SpeedDialChild(
+              child: const Icon(Icons.repeat_one),
+              label: 'Reverse',
+              onTap: () {
+                _rotationController.reverse();
+              }),
+          SpeedDialChild(
+              child: const Icon(Icons.play_circle),
+              label: 'Play',
+              onTap: () {
+                _rotationController.forward();
+              }),
+          SpeedDialChild(
+              child: const Icon(Icons.pause_circle),
+              label: 'Pause',
+              onTap: () {
+                _rotationController.stop();
+              }),
+        ],
+      ),
+      body: Center(
+        child: AnimatedBuilder(
+          animation: _rotationAnimation,
+          builder: (context, child) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                RotationTransition(
+                  turns: _rotationAnimation,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/image/flash_logo.png',
+                    width: 100,
+                    height: 100,
+                  ),
                 ),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    _rotationController.forward();
-                  },
-                  child: const Text("Play")),
-              ElevatedButton(
-                  onPressed: () {
-                    _rotationController.stop();
-                  },
-                  child: const Text("Pause")),
-              ElevatedButton(
-                  onPressed: () {
-                    _rotationController.reverse();
-                  },
-                  child: const Text("Reverse")),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

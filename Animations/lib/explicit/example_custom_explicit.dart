@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animations/explicit/batman_cutout.dart';
 import 'package:animations/explicit/clip_arc_test.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,9 @@ class CustomExplicit extends StatefulWidget {
 }
 
 class _CustomExplicitState extends State<CustomExplicit>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController _beamAnimationController;
+  double opacity = 0.0;
 
   @override
   void dispose() {
@@ -22,8 +25,15 @@ class _CustomExplicitState extends State<CustomExplicit>
   @override
   void initState() {
     _beamAnimationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 5))
-          ..repeat();
+        AnimationController(vsync: this, duration: const Duration(seconds: 10))
+          ..forward();
+
+    // Calls the Build Method and update the opacity value
+    _beamAnimationController.addListener(() async {
+      Future.delayed(const Duration(seconds: 1));
+      setState(() {});
+    });
+
     super.initState();
   }
 
@@ -51,9 +61,14 @@ class _CustomExplicitState extends State<CustomExplicit>
                     end: Alignment.topRight,
                     colors: const [
                       Colors.white,
+                      Colors.white60,
                       Colors.transparent,
                     ],
-                    stops: [0, _beamAnimationController.value],
+                    stops: [
+                      _beamAnimationController.value * 0.2,
+                      _beamAnimationController.value * 0.4,
+                      _beamAnimationController.value * 0.7
+                    ],
                   ),
                 ),
               ),
@@ -63,48 +78,41 @@ class _CustomExplicitState extends State<CustomExplicit>
         Positioned(
           left: MediaQuery.of(context).size.width * 0.6,
           top: MediaQuery.of(context).size.height * 0.05,
-          child: Stack(
-            children: [
-              Transform(
+          child: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.identity()..rotateZ(0.7),
+            child: Center(
+              child: Stack(
                 alignment: Alignment.center,
-                transform: Matrix4.identity()..rotateZ(-15),
-                child: CustomPaint(
-                  painter: OvalLightForeground(),
-                  child: const SizedBox(
-                    width: 200,
-                    height: 150,
+                children: [
+                  Opacity(
+                    opacity: _beamAnimationController.value,
+                    child: const CustomPaint(
+                      painter: OvalLightForeground(),
+                      child: SizedBox(
+                        width: 250,
+                        height: 180,
+                      ),
+                    ),
                   ),
-                ),
+                  PositionedDirectional(
+                    bottom: 25,
+                    child: Opacity(
+                      opacity: _beamAnimationController.value * 0.6,
+                      child: const CustomPaint(
+                        painter: BatmanLogo(),
+                        child: SizedBox(
+                          width: 200,
+                          height: 100,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.identity()..rotateZ(1),
-                child: const CustomPaint(
-                  painter: BatmanLogo(),
-                  child: SizedBox(
-                    width: 200,
-                    height: 100,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-        // Positioned(
-        //   left: MediaQuery.of(context).size.width * 0.6,
-        //   top: MediaQuery.of(context).size.height * 0.05,
-        //   child: Transform(
-        //     alignment: Alignment.center,
-        //     transform: Matrix4.identity()..rotateZ(1),
-        //     child: const CustomPaint(
-        //       painter: BatmanLogo(),
-        //       child: SizedBox(
-        //         width: 200,
-        //         height: 100,
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }
