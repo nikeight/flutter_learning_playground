@@ -6,7 +6,8 @@ class BatSignalExplicitAnimation extends StatefulWidget {
   const BatSignalExplicitAnimation({super.key});
 
   @override
-  State<BatSignalExplicitAnimation> createState() => _BatSignalExplicitAnimationState();
+  State<BatSignalExplicitAnimation> createState() =>
+      _BatSignalExplicitAnimationState();
 }
 
 class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
@@ -27,8 +28,7 @@ class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
           ..forward();
 
     // Calls the Build Method and update the opacity value
-    _beamAnimationController.addListener(() async {
-      Future.delayed(const Duration(seconds: 1));
+    _beamAnimationController.addListener(() {
       setState(() {});
     });
 

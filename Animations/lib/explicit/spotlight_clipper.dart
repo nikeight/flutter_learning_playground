@@ -23,4 +23,6 @@ class SpotlightClipper extends CustomClipper<Path>{
     path.lineTo(size.width * 0.25, size.height / 2.5);
     
     return path;
-  }}
+  }
+
+}

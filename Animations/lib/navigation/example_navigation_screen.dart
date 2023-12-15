@@ -6,6 +6,8 @@ class NavigationExampleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widthScreen = MediaQuery.of(context).size.width * 0.85;
+    final imageHeight = MediaQuery.of(context).size.height * 0.85;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,8 +33,12 @@ class NavigationExampleScreen extends StatelessWidget {
           color: Colors.purple.shade400,
         ),
       ),
-      body: const Center(
-        child: Text('Learn about Offsets'),
+      body: Center(
+        child: SizedBox(
+          width: widthScreen,
+          height: imageHeight,
+          child: Image.asset('assets/snippets/navigation_example_code.png'),
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:animations/close/thank_you.dart';
 import 'package:animations/explicit/bat_signal_animation.dart';
 import 'package:animations/explicit/custom_explicit_slide.dart';
 import 'package:animations/explicit/example_explicit.dart';
@@ -7,6 +8,7 @@ import 'package:animations/implicit/example_implicit.dart';
 import 'package:animations/intro/animated_title_slide.dart';
 import 'package:animations/intro/api_list_slide.dart';
 import 'package:animations/intro/introduction_slide.dart';
+import 'package:animations/util/code_snippet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -44,12 +46,32 @@ class HomeScreen extends StatelessWidget {
             // const ApiListSlide(),
             const TopicStartSlide(),
             const ImplicitExample(),
+            const ShowCodeSnippetWidget(
+              codeSnippetImageAsset: 'assets/snippets/implicit_example.png',
+            ),
             const CustomImplicitExample(),
+            const ShowCodeSnippetWidget(
+              codeSnippetImageAsset:
+                  'assets/snippets/custom_implicit_example_code.png',
+            ),
             const ExplicitExample(),
+            const ShowCodeSnippetWidget(
+              codeSnippetImageAsset:
+                  'assets/snippets/explicit_example_code.png',
+            ),
             const BatSignalExplicitAnimation(),
             const CustomExplicitSlide(),
+            const ShowCodeSnippetWidget(
+              codeSnippetImageAsset:
+              'assets/snippets/clipper_painter.png',
+            ),
             HeroAnimation(),
+            const ShowCodeSnippetWidget(
+              codeSnippetImageAsset:
+              'assets/snippets/hero_code_example.png',
+            ),
             const NavigationExampleScreen(),
+            const ThankYouSlide(),
           ],
         ),
       ),
