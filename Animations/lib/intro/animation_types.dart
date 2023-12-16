@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TopicStartSlide extends StatelessWidget {
-  const TopicStartSlide({super.key});
+class AnimationTypesSlide extends StatelessWidget {
+  const AnimationTypesSlide({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,26 +26,12 @@ class TopicStartSlide extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Animations?',
+                    'Animation Types in Flutter',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                         fontSize: 54),
                   ),
-                  Text(
-                    'Take Away?',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 54),
-                  ),
-                  Text(
-                    'Benefits?',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 54),
-                  )
                 ],
               ),
             ),

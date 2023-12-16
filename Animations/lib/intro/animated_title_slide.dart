@@ -30,8 +30,8 @@ class AnimatedTitleSlide extends StatelessWidget {
                   const Text(
                     'Understanding',
                     style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
                         fontSize: 54),
                   ),
                   AnimatedTextKit(
@@ -49,9 +49,9 @@ class AnimatedTitleSlide extends StatelessWidget {
                   const Text(
                     'APIs',
                     style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 36),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 54),
                   )
                 ],
               ),

@@ -5,15 +5,44 @@ class ThankYouSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final widthScreen = MediaQuery.of(context).size.width * 0.85;
-    final imageHeight = MediaQuery.of(context).size.height * 0.85;
     return Scaffold(
-      body: Center(
-        child: Container(
-            width: widthScreen,
-            height: imageHeight,
-            color: Colors.yellow.shade100,
-            child: const Text('Thank You')),
+      body: Container(
+        color: Colors.yellow.shade300,
+        child: const Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 24),
+            Text(
+              'Thank You',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 40,
+              ),
+            ),
+            SizedBox(height: 24),
+            Text(
+              'Twitter : nikeight_',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            SizedBox(height: 24),
+            Text(
+              'Github : nikeight',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 32,
+              ),
+            ),
+            SizedBox(height: 24)
+          ],
+        )),
       ),
     );
   }

@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 
 import 'explicit/batman_painter.dart';
 import 'hero/team_card_view.dart';
+import 'intro/animation_types.dart';
 import 'intro/talk_start_slide.dart';
 import 'navigation/example_navigation_screen.dart';
 
@@ -45,6 +46,7 @@ class HomeScreen extends StatelessWidget {
             const IntroductionSlide(),
             // const ApiListSlide(),
             const TopicStartSlide(),
+            const AnimationTypesSlide(),
             const ImplicitExample(),
             const ShowCodeSnippetWidget(
               codeSnippetImageAsset: 'assets/snippets/implicit_example.png',
@@ -62,13 +64,11 @@ class HomeScreen extends StatelessWidget {
             const BatSignalExplicitAnimation(),
             const CustomExplicitSlide(),
             const ShowCodeSnippetWidget(
-              codeSnippetImageAsset:
-              'assets/snippets/clipper_painter.png',
+              codeSnippetImageAsset: 'assets/snippets/clipper_painter.png',
             ),
             HeroAnimation(),
             const ShowCodeSnippetWidget(
-              codeSnippetImageAsset:
-              'assets/snippets/hero_code_example.png',
+              codeSnippetImageAsset: 'assets/snippets/hero_code_example.png',
             ),
             const NavigationExampleScreen(),
             const ThankYouSlide(),

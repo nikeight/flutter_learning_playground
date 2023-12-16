@@ -26,10 +26,15 @@ class IntroductionSlide extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/image/profile_pic_github.jpg',
-                  width: width * 0.45,
-                  height: height * 0.90,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: SizedBox(
+                    child: Image.asset(
+                      'assets/image/profile_pic_github.jpg',
+                      width: width * 0.45,
+                      height: height * 0.90,
+                    ),
+                  ),
                 ),
                 const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -38,17 +43,17 @@ class IntroductionSlide extends StatelessWidget {
                     Text(
                       'Niket Jain',
                       style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 32,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 54,
                       ),
                     ),
                     SizedBox(height: 32),
                     Text(
                       '➡ Android Engineer \n     at Mutual Mobile',
                       style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
                         fontSize: 24,
                       ),
                     ),
@@ -56,8 +61,8 @@ class IntroductionSlide extends StatelessWidget {
                     Text(
                       '➡ GDG Bhilai Core Member',
                       style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
                         fontSize: 24,
                       ),
                     ),
@@ -65,8 +70,8 @@ class IntroductionSlide extends StatelessWidget {
                     Text(
                       '➡ Open Source Contributor',
                       style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
                         fontSize: 24,
                       ),
                     ),
@@ -74,8 +79,8 @@ class IntroductionSlide extends StatelessWidget {
                     Text(
                       '➡ Patzer ♟️',
                       style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
                         fontSize: 24,
                       ),
                     ),
