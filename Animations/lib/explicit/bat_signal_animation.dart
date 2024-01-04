@@ -13,7 +13,8 @@ class BatSignalExplicitAnimation extends StatefulWidget {
 class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
     with TickerProviderStateMixin {
   late final AnimationController _beamAnimationController;
-  double opacity = 0.0;
+  late final Animation<double> _beamAnimation;
+  double newOpacity = 0.0;
 
   @override
   void dispose() {
@@ -24,12 +25,32 @@ class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
   @override
   void initState() {
     _beamAnimationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 10))
+        AnimationController(vsync: this, duration: const Duration(seconds: 6))
           ..forward();
+
+    _beamAnimation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(
+        CurvedAnimation(
+            parent: _beamAnimationController,
+            curve: Curves.fastEaseInToSlowEaseOut,
+        ),
+    );
 
     // Calls the Build Method and update the opacity value
     _beamAnimationController.addListener(() {
-      setState(() {});
+      setState(() {
+        newOpacity = _beamAnimationController.value * 0.7;
+      });
+    });
+
+    _beamAnimationController.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        await Future.delayed(const Duration(seconds: 2));
+        _beamAnimationController.reset();
+        _beamAnimationController.forward();
+      }
     });
 
     super.initState();
@@ -46,7 +67,7 @@ class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
           height: MediaQuery.of(context).size.height,
         ),
         AnimatedBuilder(
-          animation: _beamAnimationController,
+          animation: _beamAnimation,
           builder: (context, child) {
             return ClipPath(
               clipper: const SpotlightClipper(),
@@ -63,9 +84,9 @@ class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
                       Colors.transparent,
                     ],
                     stops: [
-                      _beamAnimationController.value * 0.2,
-                      _beamAnimationController.value * 0.4,
-                      _beamAnimationController.value * 0.7
+                      _beamAnimation.value * 0.2,
+                      _beamAnimation.value * 0.4,
+                      _beamAnimation.value * 0.7
                     ],
                   ),
                 ),
@@ -84,7 +105,7 @@ class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
                 alignment: Alignment.center,
                 children: [
                   Opacity(
-                    opacity: _beamAnimationController.value,
+                    opacity: newOpacity,
                     child: const CustomPaint(
                       painter: OvalLightForeground(),
                       child: SizedBox(
@@ -96,7 +117,7 @@ class _BatSignalExplicitAnimationState extends State<BatSignalExplicitAnimation>
                   PositionedDirectional(
                     bottom: 25,
                     child: Opacity(
-                      opacity: _beamAnimationController.value * 0.6,
+                      opacity: newOpacity,
                       child: const CustomPaint(
                         painter: BatmanLogo(),
                         child: SizedBox(
