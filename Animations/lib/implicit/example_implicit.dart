@@ -1,48 +1,33 @@
 import 'dart:math';
 
+import 'package:animations/implicit/implicit_built_in.dart';
 import 'package:flutter/material.dart';
 
+// TODO : Create a Common Widget for info
 /// Animation State needed to be changed everytime in order to work
 /// Can't repeat and stop at middle
 /// Once initialized nothing changes until the Widget is re-drawn with new value
-class ImplicitExample extends StatefulWidget {
+class ImplicitExample extends StatelessWidget {
   const ImplicitExample({super.key});
 
   @override
-  State<ImplicitExample> createState() => _ImplicitExampleState();
-}
-
-class _ImplicitExampleState extends State<ImplicitExample> {
-  final Random random = Random();
-  double turns = 0.0;
-
-  @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Implicit Animation',
+        title: const Text('Implicit Animation',
             style: TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
               fontSize: 36,
-            )
-        ),
+            )),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AnimatedRotation(
-              turns: turns,
-              duration: const Duration(seconds: 3),
-              child: Image.asset(
-                'assets/image/flash_logo.png',
-                width: 200,
-                height: 200,
-              ),
-            ),
             const SizedBox(height: 40),
             const Text(
               '⦿ Easy to Start',
@@ -89,16 +74,54 @@ class _ImplicitExampleState extends State<ImplicitExample> {
               ),
             ),
             const SizedBox(height: 24),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const ImplicitBuiltInApiListScreen(),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: screenWidth * 0.4,
+                      child: const Text(
+                        'Built-In',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: SizedBox(
+                      width: screenWidth * 0.4,
+                      child: const Text(
+                        'Custom',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            turns = 10.0 * random.nextDouble();
-          });
-        },
-        child: const Icon(Icons.play_arrow),
       ),
     );
   }
