@@ -1,3 +1,7 @@
+import 'package:animations/explicit/example_explicit.dart';
+import 'package:animations/hero/example_hero_animation.dart';
+import 'package:animations/implicit/example_implicit.dart';
+import 'package:animations/navigation/example_navigation_screen.dart';
 import 'package:flutter/material.dart';
 
 class AnimationTypesSlide extends StatelessWidget {
@@ -8,37 +12,128 @@ class AnimationTypesSlide extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: width,
-              height: height,
-              color: Colors.amber.shade200,
-              child: const SizedBox(),
-            ),
-            SizedBox(
-              width: width * 0.5,
-              height: height * 0.5,
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+      appBar: AppBar(
+        title: const Text('Animation Types'),
+        centerTitle: true,
+      ),
+      body: Container(
+        color: Colors.amber.shade200,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Animation Types in Flutter',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 54),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ImplicitExample(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: width * 0.3,
+                      height: height * 0.3,
+                      color: Colors.purple.shade500,
+                      child: const Center(
+                        child: Text(
+                          'Implicit',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 54),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ExplicitExample(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: width * 0.3,
+                      height: height * 0.3,
+                      color: Colors.blue.shade600,
+                      child: const Center(
+                        child: Text(
+                          'Explicit',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 54),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const NavigationExampleScreen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: width * 0.3,
+                      height: height * 0.3,
+                      color: Colors.blueGrey.shade600,
+                      child: const Center(
+                        child: Text(
+                          'Navigation',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 54),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => HeroAnimation(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: width * 0.3,
+                      height: height * 0.3,
+                      color: Colors.green.shade600,
+                      child: const Center(
+                        child: Text(
+                          'Hero',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 54),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
-    ;
   }
 }
