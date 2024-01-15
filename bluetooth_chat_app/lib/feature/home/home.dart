@@ -1,3 +1,4 @@
+import 'package:bluetooth_chat_app/feature/chat/chat_list_screen.dart';
 import 'package:bluetooth_chat_app/feature/setting/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Text(
       'Index 0: Search Device',
     ),
-    Text(
-      'Index 1: Chat',
-    ),
+    ChatListScreen(),
     SettingsScreen(),
   ];
 
