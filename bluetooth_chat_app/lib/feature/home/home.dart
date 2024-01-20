@@ -1,4 +1,5 @@
-import 'package:bluetooth_chat_app/feature/chat/chat_list_screen.dart';
+import 'package:bluetooth_chat_app/feature/chat/user_list_screen.dart';
+import 'package:bluetooth_chat_app/feature/scan/search_device_screen.dart';
 import 'package:bluetooth_chat_app/feature/setting/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _appScreens = <Widget>[
-    Text(
-      'Index 0: Search Device',
-    ),
-    ChatListScreen(),
+    SearchDeviceScreen(),
+    UserListScreen(),
     SettingsScreen(),
   ];
 

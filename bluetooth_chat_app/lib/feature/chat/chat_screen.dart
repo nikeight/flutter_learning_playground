@@ -1,9 +1,9 @@
-import 'package:bluetooth_chat_app/feature/chat/chat_bubble_component.dart';
-import 'package:bluetooth_chat_app/feature/chat/model/chat.dart';
+import 'package:bluetooth_chat_app/feature/chat/component/chat_bubble_component.dart';
+import 'package:bluetooth_chat_app/feature/chat/model/message.dart';
 import 'package:flutter/material.dart';
 
-class ChatListScreen extends StatelessWidget {
-  const ChatListScreen({super.key});
+class ChatScreen extends StatelessWidget {
+  const ChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ChatListScreen extends StatelessWidget {
                   child: ChatBubbleComponent(
                     isRead: messageProps.isRead,
                     isSending: messageProps.isSending,
-                    message: messageProps.message,
+                    message: messageProps.content,
                     timeStamp: messageProps.timeStamp,
                   ),
                 ),
@@ -32,7 +32,7 @@ class ChatListScreen extends StatelessWidget {
                   child: ChatBubbleComponent(
                     isRead: messageProps.isRead,
                     isSending: messageProps.isSending,
-                    message: messageProps.message,
+                    message: messageProps.content,
                     timeStamp: messageProps.timeStamp,
                   ),
                 ),
@@ -43,36 +43,36 @@ class ChatListScreen extends StatelessWidget {
 }
 
 final dummyChatList = [
-  Chat(
-      message: "Hey",
+  Message(
+      content: "Hey",
       sender: "Niket",
       receiver: "Bobby",
       timeStamp: DateTime.now().day.toString(),
       isRead: true,
       isSending: true),
-  Chat(
-      message: "Hello",
+  Message(
+      content: "Hello",
       sender: "Bobby",
       receiver: "Niket",
       timeStamp: DateTime.now().month.toString(),
       isRead: true,
       isSending: false),
-  Chat(
-      message: "Wanna play chess?",
+  Message(
+      content: "Wanna play chess?",
       sender: "Niket",
       receiver: "Bobby",
       timeStamp: DateTime.now().hour.toString(),
       isRead: true,
       isSending: true),
-  Chat(
-      message: "Sure",
+  Message(
+      content: "Sure",
       sender: "Bobby",
       receiver: "Niket",
       timeStamp: DateTime.now().day.toString(),
       isRead: true,
       isSending: false),
-  Chat(
-      message: "Sending the game challenge link",
+  Message(
+      content: "Sending the game challenge link",
       sender: "Niket",
       receiver: "Bobby",
       timeStamp: DateTime.now().day.toString(),

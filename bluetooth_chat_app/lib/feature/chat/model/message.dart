@@ -1,13 +1,13 @@
-class Chat {
-  final String message;
+class Message {
+  final String content;
   final String sender;
   final String receiver;
   final String timeStamp;
   final bool isRead;
   final bool isSending;
 
-  Chat({
-    required this.message,
+  Message({
+    required this.content,
     required this.sender,
     required this.receiver,
     required this.timeStamp,
