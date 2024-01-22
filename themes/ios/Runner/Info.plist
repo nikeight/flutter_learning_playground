@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Bluetooth Chat App</string>
+	<string>Themes</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>bluetooth_chat_app</string>
+	<string>themes</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -45,15 +45,5 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-        <string>This app always needs Bluetooth to function</string>
-        <key>NSBluetoothPeripheralUsageDescription</key>
-        <string>This app needs Bluetooth Peripheral to function</string>
-        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-        <string>This app always needs location and when in use to function</string>
-        <key>NSLocationAlwaysUsageDescription</key>
-        <string>This app always needs location to function</string>
-        <key>NSLocationWhenInUseUsageDescription</key>
-        <string>This app needs location when in use to function</string>
 </dict>
 </plist>
