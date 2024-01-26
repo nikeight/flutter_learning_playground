@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:themes/doubble_value_example.dart';
 import 'package:themes/theme/CustomColorTween.dart';
-import 'package:themes/theme/custom_colors.dart';
 import 'package:themes/theme/custome_color_modal.dart';
+import 'package:themes/theme/extension_theme.dart';
 
 void main() {
-  runApp(const DoubleValueExample());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -17,45 +16,23 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   bool _isDarkModeEnable = false;
-  CustomColorModal currentCustomColorModal = CustomColorModal(
-    brand50: CustomColors.color1Light,
-    brand100: CustomColors.color2Light,
-  );
 
   // Light theme
-  final lightTheme = CustomColorModal(
-    brand50: CustomColors.color1Light,
-    brand100: CustomColors.color2Light,
-  );
+  final lightTheme = lightColorModal;
 
-  final darkTheme = CustomColorModal(
-    brand50: CustomColors.color1Dark,
-    brand100: CustomColors.color2Dark,
-  );
+  final darkTheme = darkColorModal;
 
   late AnimationController _animationController;
   late Animation<CustomColorModal> _animation;
 
   @override
   void initState() {
-    super.initState();
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
 
-    CustomColorTween customTween = CustomColorTween(
-      lastColorScheme: lightTheme,
-      newColorScheme: darkTheme,
-    );
-
-    _animation = customTween.animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.fastEaseInToSlowEaseOut));
-
-    _animation.addListener(() {
-      currentCustomColorModal = _animation.value;
-      print("Current Color Vale : ${_animation.value.brand100}");
-    });
+    super.initState();
   }
 
   @override
@@ -66,31 +43,26 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // If the Current Theme is White
-    // Keep last Color Scheme as for Light Theme ( begin Value )
-    // else last Color Scheme as for Dark Theme ( begin Value )
-    CustomColorModal lastColorScheme =
-        MediaQuery.of(context).platformBrightness == Brightness.light
-            ? lightTheme
-            : darkTheme;
+    CustomColorTween customTween = context.isDarkMode()
+        ? CustomColorTween(
+            lastColorScheme: darkTheme,
+            newColorScheme: lightTheme,
+          )
+        : CustomColorTween(
+            lastColorScheme: lightTheme,
+            newColorScheme: darkTheme,
+          );
 
-    // If the Current Theme is White
-    // Keep new Color Scheme as for Dark Theme ( end Value )
-    // else new Color Scheme as for Dark Theme ( end Value )
-    CustomColorModal newColorScheme =
-        MediaQuery.of(context).platformBrightness == Brightness.light
-            ? darkTheme
-            : lightTheme;
+    _animation = customTween.animate(CurvedAnimation(
+        parent: _animationController, curve: Curves.linear));
 
-    void updateTheme(bool value) {
-      setState(() {
-        _isDarkModeEnable = value;
-        if (value) {
-          _animationController.forward();
-        } else {
-          _animationController.reverse();
-        }
-      });
+    bool moveToForwardAnimation(
+        {bool isDarkTheme = false, bool switchOn = false}) {
+      if ((!isDarkTheme && !switchOn) || (isDarkTheme && switchOn)) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     return MaterialApp(
@@ -101,9 +73,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
           return Scaffold(
             backgroundColor: _animation.value.brand100,
             appBar: AppBar(
+              backgroundColor: _animation.value.brand50,
               title: Text(
                 'Theme POC',
-                style: TextStyle(color: _animation.value.brand100),
+                style: TextStyle(color: _animation.value.textColor),
               ),
             ),
             body: Center(
@@ -120,7 +93,16 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   ),
                   Switch(
                     value: _isDarkModeEnable,
-                    onChanged: updateTheme,
+                    onChanged: (switchValue) {
+                      setState(() {
+                        _isDarkModeEnable = switchValue;
+                        if (switchValue) {
+                          _animationController.forward();
+                        } else {
+                          _animationController.reverse();
+                        }
+                      });
+                    },
                   ),
                 ],
               ),

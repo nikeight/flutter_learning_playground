@@ -17,6 +17,8 @@ dependencies:
   riverpod_annotation: ^2.3.3
   flutter_blue_plus: ^1.31.7
   permission_handler: ^11.1.0
+  flutter_hooks: 0.20.4
+  hooks_riverpod: 2.4.9
 
 dev_dependencies:
   flutter_test:

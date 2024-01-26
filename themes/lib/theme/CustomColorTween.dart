@@ -9,7 +9,7 @@ class CustomColorTween extends Tween<CustomColorModal> {
   CustomColorTween({
     required this.lastColorScheme,
     required this.newColorScheme,
-  }) : super(begin: newColorScheme, end: newColorScheme);
+  }) : super(begin: lastColorScheme, end: newColorScheme);
 
   @override
   CustomColorModal lerp(double t) {
@@ -19,6 +19,8 @@ class CustomColorTween extends Tween<CustomColorModal> {
       brand100:
           Color.lerp(lastColorScheme.brand100, newColorScheme.brand100, t) ??
               const Color(0x00ffffff),
+      textColor: Color.lerp(lastColorScheme.brand100, newColorScheme.brand100, t) ??
+          const Color(0x00ffffff)
     );
   }
 }
