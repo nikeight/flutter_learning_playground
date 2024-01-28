@@ -1,4 +1,6 @@
 import 'package:animations/implicit/built_in/implicit_animate_align.dart';
+import 'package:animations/implicit/built_in/implicit_animate_container.dart';
+import 'package:animations/implicit/built_in/implicit_animate_text.dart';
 import 'package:animations/implicit/built_in/implicit_modal.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +24,9 @@ class ImplicitBuiltInHomeScreen extends StatelessWidget {
       case ImplicitBuiltIn.animatedAlign:
         return const ImplicitAnimateAlign();
       case ImplicitBuiltIn.animatedContainer:
-        return Text(animationType.name);
+        return const ImplicitAnimateContainer();
       case ImplicitBuiltIn.animatedDefaultTextStyle:
-        return Text(animationType.name);
+        return const ImplicitAnimateText();
       case ImplicitBuiltIn.animatedScale:
         return Text(animationType.name);
       case ImplicitBuiltIn.animatedRotation:

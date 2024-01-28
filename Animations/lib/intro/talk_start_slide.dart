@@ -53,6 +53,5 @@ class TopicStartSlide extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
