@@ -9,7 +9,6 @@ Future<void> main() async {
 class AnimationApp extends StatelessWidget {
   const AnimationApp({super.key});
 
-  // Todo : Add Font Family
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

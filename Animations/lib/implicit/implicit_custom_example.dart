@@ -3,14 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 // Todo : Add More data
-class CustomImplicitExample extends StatefulWidget {
-  const CustomImplicitExample({super.key});
+class ImplicitCustomExample extends StatefulWidget {
+  const ImplicitCustomExample({super.key});
 
   @override
-  State<CustomImplicitExample> createState() => _CustomImplicitExampleState();
+  State<ImplicitCustomExample> createState() => _ImplicitCustomExampleState();
 }
 
-class _CustomImplicitExampleState extends State<CustomImplicitExample> {
+class _ImplicitCustomExampleState extends State<ImplicitCustomExample> {
   double percentage = 0.1;
   late FocusNode focusNode;
 

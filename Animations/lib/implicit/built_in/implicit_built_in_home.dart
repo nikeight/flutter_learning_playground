@@ -1,4 +1,5 @@
-import 'package:animations/implicit/implicit_modal.dart';
+import 'package:animations/implicit/built_in/implicit_animate_align.dart';
+import 'package:animations/implicit/built_in/implicit_modal.dart';
 import 'package:flutter/material.dart';
 
 class ImplicitBuiltInHomeScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class ImplicitBuiltInHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Choose a animation type'),
+        title: Text(animationType.name),
       ),
       body: getSelectedWidget(animationType),
     );
@@ -19,7 +20,7 @@ class ImplicitBuiltInHomeScreen extends StatelessWidget {
   Widget getSelectedWidget(ImplicitBuiltIn type) {
     switch (animationType) {
       case ImplicitBuiltIn.animatedAlign:
-        return Text(animationType.name);
+        return const ImplicitAnimateAlign();
       case ImplicitBuiltIn.animatedContainer:
         return Text(animationType.name);
       case ImplicitBuiltIn.animatedDefaultTextStyle:

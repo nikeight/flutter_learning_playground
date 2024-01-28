@@ -1,9 +1,11 @@
 import 'package:animations/explicit/example_explicit.dart';
 import 'package:animations/hero/example_hero_animation.dart';
-import 'package:animations/implicit/example_implicit.dart';
+import 'package:animations/implicit/implicit_intro.dart';
 import 'package:animations/navigation/example_navigation_screen.dart';
 import 'package:flutter/material.dart';
 
+/// Contains the Grid View
+/// as a different options for various animations
 class AnimationTypesSlide extends StatelessWidget {
   const AnimationTypesSlide({super.key});
 
@@ -31,7 +33,7 @@ class AnimationTypesSlide extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const ImplicitExample(),
+                          builder: (context) => const ImplicitIntro(),
                         ),
                       );
                     },

@@ -1,14 +1,17 @@
-import 'dart:math';
-
-import 'package:animations/implicit/implicit_built_in.dart';
+import 'package:animations/implicit/implicit_built_in_api_list.dart';
 import 'package:flutter/material.dart';
+
+/// Widget to display few important details about implicit animation
+/// Providing options to explore
+/// - Built In API's
+/// - Custom Examples
 
 // TODO : Create a Common Widget for info
 /// Animation State needed to be changed everytime in order to work
 /// Can't repeat and stop at middle
 /// Once initialized nothing changes until the Widget is re-drawn with new value
-class ImplicitExample extends StatelessWidget {
-  const ImplicitExample({super.key});
+class ImplicitIntro extends StatelessWidget {
+  const ImplicitIntro({super.key});
 
   @override
   Widget build(BuildContext context) {

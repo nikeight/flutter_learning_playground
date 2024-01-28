@@ -1,11 +1,15 @@
 import 'package:animations/close/thank_you.dart';
 import 'package:animations/explicit/bat_signal_animation.dart';
-import 'package:animations/implicit/example_custom_implicit.dart';
+import 'package:animations/implicit/implicit_custom_example.dart';
 import 'package:animations/intro/animated_title_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'intro/animation_types.dart';
 
+/// First Widget of the Application
+/// Act as a Starting Point
+/// Contains PageViewer, which is controlled by
+/// arrow keys
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -32,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           children: const <Widget>[
             AnimatedTitleSlide(),
             AnimationTypesSlide(),
-            CustomImplicitExample(),
+            ImplicitCustomExample(),
             BatSignalExplicitAnimation(),
             ThankYouSlide(),
           ],

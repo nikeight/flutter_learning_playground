@@ -1,5 +1,5 @@
 import 'package:animations/implicit/built_in/implicit_built_in_home.dart';
-import 'package:animations/implicit/implicit_modal.dart';
+import 'package:animations/implicit/built_in/implicit_modal.dart';
 import 'package:flutter/material.dart';
 
 class ImplicitBuiltInApiListScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class ImplicitBuiltInApiListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Built In Implicit type animation'),
+        title: const Text('Implicit Built-In API'),
       ),
       body: ListView.builder(
         itemCount: ImplicitBuiltIn.values.length,
