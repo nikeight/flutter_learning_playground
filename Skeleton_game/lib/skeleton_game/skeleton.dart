@@ -12,6 +12,12 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     with CollisionCallbacks, HasGameReference<SkeletonGame> {
   final PlayerData playerData;
 
+  double ySpeed = 0.0;
+
+  double yMax = 0.0;
+
+  static const double gravity = 800;
+
   final rectHitBoxBorder = BasicPalette.darkRed.paint()
     ..style = PaintingStyle.stroke;
 
@@ -46,6 +52,8 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     // `70` as we have scaled the Skeleton to twice,(not 35)
     position = Vector2(180, game.size.y - 70);
 
+    yMax = y;
+
     _walkHitBox = PolygonHitbox.relative(
       [
         Vector2(0, 1), // Middle of top wall
@@ -74,9 +82,11 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
 
     await addAll([_walkHitBox, _attackHitBox]);
 
+    // Ticker for Attack Mode,
+    // Once Complete the Ticket resets, and current mode changes to Walk.
+    // Attack polygon Collision becomes inactive again.
     animationTickers?[SkeletonState.attack]?.onComplete = () {
       animationTicker?.reset();
-      game.isSkeletonAttacking = false;
       current = SkeletonState.walk;
       playerData.currentState = SkeletonState.walk;
       _attackHitBox.collisionType = CollisionType.inactive;
@@ -90,6 +100,9 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     return super.onLoad();
   }
 
+  // Hit Detection logic
+  // If Skeleton is Walk or Jump
+  // collide with enemy it is reacted as a hit
   @override
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
@@ -97,6 +110,12 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     if ((other is Enemy) &&
         current != SkeletonState.hit &&
         playerData.currentState == SkeletonState.walk) {
+      _hitDetected();
+    }
+
+    if ((other is Enemy) &&
+        current != SkeletonState.hit &&
+        playerData.currentState == SkeletonState.jump) {
       _hitDetected();
     }
   }
@@ -109,17 +128,49 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     }
   }
 
+  // Jumps the Skeleton
+  // Condition : It needed to be in ground initially
+  // Attack Mode gets inActive initially
+  // Current Mode changes to `Jump` until the character is in air.
+  void skeletonJump() {
+    if (_isOnGround) {
+      ySpeed = -400;
+      current = SkeletonState.idle;
+      _attackHitBox.collisionType = CollisionType.inactive;
+      playerData.currentState = SkeletonState.jump;
+    }
+  }
+
   void updateCollisionTypeForAttackCurrent() {
     playerData.currentState = SkeletonState.attack;
     _attackHitBox.collisionType = CollisionType.active;
   }
+
+  @override
+  void update(double dt) {
+    // Updates the Y Axis value
+    // Helps to bring the Skeleton Down again
+    ySpeed += gravity * dt;
+
+    y += ySpeed * dt;
+
+    // If the Skeleton is in ground again
+    // Start the Walk Animation
+    if (_isOnGround) {
+      y = yMax;
+      ySpeed = 0.0;
+      if (current != SkeletonState.hit &&
+          current != SkeletonState.walk &&
+          current != SkeletonState.attack) {
+        current = SkeletonState.walk;
+        playerData.currentState = SkeletonState.walk;
+      }
+    }
+
+    super.update(dt);
+  }
+
+  bool get _isOnGround => (y >= yMax);
 }
 
-enum SkeletonState {
-  idle,
-  react,
-  walk,
-  attack,
-  hit,
-  dead,
-}
+enum SkeletonState { idle, react, walk, attack, hit, dead, jump }

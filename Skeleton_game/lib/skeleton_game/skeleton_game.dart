@@ -12,12 +12,13 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
+class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, DragCallbacks {
   static const _imageAssets = [
     'skeleton_stripes/walk.png',
     'skeleton_stripes/attack.png',
     'skeleton_stripes/hit.png',
     'skeleton_stripes/dead.png',
+    'skeleton_stripes/idle.png',
     'enemy_stripes/ghoul_run.png'
   ];
 
@@ -28,7 +29,6 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
   late PlayerData playerData;
   late SettingsData settingsData;
   final EnemyManager _enemyManager = EnemyManager();
-  bool isSkeletonAttacking = false;
 
   @override
   Future<void> onLoad() async {
@@ -63,10 +63,20 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
 
   @override
   void onTapDown(TapDownInfo info) {
-    _skeleton.current = SkeletonState.attack;
-    isSkeletonAttacking = true;
     _skeleton.updateCollisionTypeForAttackCurrent();
+    _skeleton.current = SkeletonState.attack;
     super.onTapDown(info);
+  }
+
+  /// We do a jump whenever the
+  /// Y velocity is in negative i.e
+  /// a drag event detected for upward drag
+  @override
+  void onDragEnd(DragEndEvent event) {
+    if (event.velocity.y <= 0) {
+      _skeleton.skeletonJump();
+    }
+    super.onDragEnd(event);
   }
 
   @override
@@ -100,6 +110,15 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
     _skeleton = Skeleton(
       playerData: playerData,
       animations: {
+        SkeletonState.idle: SpriteAnimation.fromFrameData(
+          images.fromCache('skeleton_stripes/idle.png'),
+          SpriteAnimationData.sequenced(
+            amount: 11,
+            stepTime: 0.1,
+            textureSize: Vector2(24, 32),
+            // texturePosition: Vector2(22, 0),
+          ),
+        ),
         SkeletonState.walk: SpriteAnimation.fromFrameData(
           images.fromCache('skeleton_stripes/walk.png'),
           SpriteAnimationData.sequenced(
@@ -112,8 +131,8 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
         SkeletonState.hit: SpriteAnimation.fromFrameData(
           images.fromCache('skeleton_stripes/hit.png'),
           SpriteAnimationData.sequenced(
-              amount: 7,
-              stepTime: 0.25,
+              amount: 8,
+              stepTime: 0.1,
               textureSize: Vector2(30, 32),
               texturePosition: Vector2(-60, 0),
               loop: false),
@@ -122,7 +141,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection {
           images.fromCache('skeleton_stripes/attack.png'),
           SpriteAnimationData.sequenced(
               amount: 14,
-              stepTime: 0.1,
+              stepTime: 0.08,
               textureSize: Vector2(43, 37),
               texturePosition: Vector2(43, 2),
               loop: false),
