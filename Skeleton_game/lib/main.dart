@@ -1,11 +1,10 @@
-import 'package:first_flutter_project/models/player_data.dart';
-import 'package:first_flutter_project/models/settings_data.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game_app.dart';
+import 'package:skeleton_walk/models/player_data.dart';
+import 'package:skeleton_walk/models/settings_data.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game_app.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-
 
 Future<void> main() async {
   // Ensures that all bindings are initialized

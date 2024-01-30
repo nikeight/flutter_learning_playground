@@ -1,8 +1,8 @@
-import 'package:first_flutter_project/enemy/enemy.dart';
-import 'package:first_flutter_project/models/enemy_data.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
+import 'package:skeleton_walk/enemy/enemy.dart';
+import 'package:skeleton_walk/models/enemy_data.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 class EnemyManager extends Component with HasGameReference<SkeletonGame> {
   final List<EnemyData> _enemiesTypeList = [];

@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:first_flutter_project/models/player_data.dart';
-import 'package:first_flutter_project/overlays/game_hud.dart';
-import 'package:first_flutter_project/overlays/main_menu_overlay.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
+import 'package:skeleton_walk/models/player_data.dart';
+import 'package:skeleton_walk/overlays/game_hud.dart';
+import 'package:skeleton_walk/overlays/main_menu_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

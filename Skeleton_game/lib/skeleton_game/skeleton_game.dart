@@ -1,10 +1,10 @@
-import 'package:first_flutter_project/enemy/enemy_manager.dart';
-import 'package:first_flutter_project/models/player_data.dart';
-import 'package:first_flutter_project/models/settings_data.dart';
-import 'package:first_flutter_project/overlays/game_hud.dart';
-import 'package:first_flutter_project/overlays/game_over_overlay.dart';
-import 'package:first_flutter_project/overlays/pause_overlay.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton.dart';
+import 'package:skeleton_walk/enemy/enemy_manager.dart';
+import 'package:skeleton_walk/models/player_data.dart';
+import 'package:skeleton_walk/models/settings_data.dart';
+import 'package:skeleton_walk/overlays/game_hud.dart';
+import 'package:skeleton_walk/overlays/game_over_overlay.dart';
+import 'package:skeleton_walk/overlays/pause_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -20,6 +20,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
     'skeleton_stripes/dead.png',
     'skeleton_stripes/idle.png',
     'enemy_stripes/ghoul_run.png'
+    'enemy_stripes/bat_fly.png'
   ];
 
   // List of all the audio assets.
@@ -149,7 +150,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
         SkeletonState.dead: SpriteAnimation.fromFrameData(
           images.fromCache('skeleton_stripes/dead.png'),
           SpriteAnimationData.sequenced(
-              amount: 14,
+              amount: 15,
               stepTime: 0.1,
               textureSize: Vector2(33, 33),
               texturePosition: Vector2(33, 0),
@@ -158,6 +159,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
       },
       current: SkeletonState.walk,
     );
+
 
     add(_skeleton);
     add(_enemyManager);

@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:first_flutter_project/enemy/enemy.dart';
-import 'package:first_flutter_project/models/player_data.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
+import 'package:skeleton_walk/enemy/enemy.dart';
+import 'package:skeleton_walk/models/player_data.dart';
+import 'package:skeleton_walk/overlays/game_hud.dart';
+import 'package:skeleton_walk/overlays/game_over_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
@@ -109,22 +111,25 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     super.onCollisionStart(intersectionPoints, other);
     if ((other is Enemy) &&
         current != SkeletonState.hit &&
-        playerData.currentState == SkeletonState.walk) {
+        playerData.currentState == SkeletonState.walk &&
+        playerData.currentState != SkeletonState.dead) {
       _hitDetected();
     }
 
     if ((other is Enemy) &&
         current != SkeletonState.hit &&
-        playerData.currentState == SkeletonState.jump) {
+        playerData.currentState == SkeletonState.jump &&
+        playerData.currentState != SkeletonState.dead) {
       _hitDetected();
     }
   }
 
   void _hitDetected() {
-    current = SkeletonState.hit;
     playerData.lives -= 1;
-    if (playerData.currentScore > 0) {
-      playerData.currentScore -= 1;
+    if (playerData.lives <= 0) {
+      gameOver();
+    } else {
+      current = SkeletonState.hit;
     }
   }
 
@@ -156,12 +161,17 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
 
     // If the Skeleton is in ground again
     // Start the Walk Animation
+    // Checks if Skeleton is
+    // Not Hit, Walk, Attack and Dead State
+    // If Not, then make it walk
     if (_isOnGround) {
       y = yMax;
       ySpeed = 0.0;
       if (current != SkeletonState.hit &&
           current != SkeletonState.walk &&
-          current != SkeletonState.attack) {
+          current != SkeletonState.attack &&
+          current != SkeletonState.dead
+      ) {
         current = SkeletonState.walk;
         playerData.currentState = SkeletonState.walk;
       }
@@ -171,6 +181,19 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
   }
 
   bool get _isOnGround => (y >= yMax);
+
+  // Game Overs
+  // Hit Animation changed with Dead Animation
+  // For the Last life
+
+  void gameOver() {
+    playerData.currentState = SkeletonState.dead;
+    current = SkeletonState.dead;
+    Future.delayed(const Duration(seconds: 3, milliseconds: 500))
+        .then((value) => game.pauseEngine());
+    game.overlays.remove(GameHud.id);
+    game.overlays.add(GameOverOverlay.id);
+  }
 }
 
 enum SkeletonState { idle, react, walk, attack, hit, dead, jump }

@@ -578,13 +578,13 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "first_flutter_project",
+      "name": "skeleton_walk",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-01-29T10:19:57.152365Z",
+  "generated": "2024-01-30T18:40:11.752262Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

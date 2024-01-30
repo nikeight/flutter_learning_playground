@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:first_flutter_project/overlays/game_hud.dart';
-import 'package:first_flutter_project/overlays/setting_overlay.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
+import 'package:skeleton_walk/overlays/game_hud.dart';
+import 'package:skeleton_walk/overlays/setting_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuOverLay extends StatelessWidget {

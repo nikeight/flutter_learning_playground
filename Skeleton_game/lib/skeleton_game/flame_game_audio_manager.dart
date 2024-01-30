@@ -1,4 +1,4 @@
-import 'package:first_flutter_project/models/settings_data.dart';
+import 'package:skeleton_walk/models/settings_data.dart';
 import 'package:flame_audio/flame_audio.dart';
 
 

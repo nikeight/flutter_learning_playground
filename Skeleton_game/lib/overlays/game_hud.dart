@@ -1,8 +1,8 @@
-import 'package:first_flutter_project/models/player_data.dart';
-import 'package:first_flutter_project/overlays/pause_overlay.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeleton_walk/models/player_data.dart';
+import 'package:skeleton_walk/overlays/pause_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 /// Displays the Players data at the top of the Screen
 /// Which Includes

@@ -1,6 +1,6 @@
-import 'package:first_flutter_project/skeleton_game/skeleton.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton.dart';
 
 part 'player_data.g.dart';
 
@@ -13,7 +13,7 @@ class PlayerData extends ChangeNotifier with HiveObjectMixin {
   @HiveField(0)
   int highScore = 0;
 
-  int _lives = 5;
+  int _lives = 1;
 
   int get lives => _lives;
 

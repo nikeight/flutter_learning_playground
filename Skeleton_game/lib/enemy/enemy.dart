@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:first_flutter_project/models/enemy_data.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton.dart';
-import 'package:first_flutter_project/skeleton_game/skeleton_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame/palette.dart';
+import 'package:skeleton_walk/models/enemy_data.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton.dart';
+import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 class Enemy extends SpriteAnimationComponent
     with CollisionCallbacks, HasGameReference<SkeletonGame> {

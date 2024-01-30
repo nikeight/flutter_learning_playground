@@ -1,5 +1,5 @@
-name: first_flutter_project
-description: A new Flutter project.
+name: skeleton_walk
+description: a 2D game develop for fun, where goal is to make as high score as possible.
 
 publish_to: 'none'
 
