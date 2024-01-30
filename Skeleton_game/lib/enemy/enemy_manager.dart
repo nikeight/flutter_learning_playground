@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
 import 'package:skeleton_walk/enemy/enemy.dart';
@@ -7,26 +9,31 @@ import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 class EnemyManager extends Component with HasGameReference<SkeletonGame> {
   final List<EnemyData> _enemiesTypeList = [];
 
-  final Timer enemySpawnTimer = Timer(4, repeat: true);
+  final Random randomSpawn = Random();
 
-  spawnEnemies() {
-    _enemiesTypeList.add(
-      EnemyData(
-        image: game.images.fromCache('enemy_stripes/ghoul_run.png'),
-        nFrames: 7,
-        textureSize: Vector2(31.7, 26),
-        texturePosition: Vector2(31, 0),
-        speedX: 80,
-      ),
-    );
-    final ghoulEnemyData = _enemiesTypeList.first;
-    final enemy = Enemy(ghoulEnemyData);
+  final Timer enemySpawnTimer = Timer(3, repeat: true);
+
+  spawnRandomEnemies() {
+    // Selects a random enemy type
+    final randomIndex = randomSpawn.nextInt(_enemiesTypeList.length);
+    final randomEnemyData = _enemiesTypeList[randomIndex];
+    final enemy = Enemy(randomEnemyData);
+
+    // Anchor it from Left side of the Screen
     enemy.anchor = Anchor.bottomLeft;
     enemy.position = Vector2(
       game.size.x + 32,
       game.size.y - enemy.y,
     );
-    enemy.size = ghoulEnemyData.textureSize;
+
+    //[Special Case: If enemy can fly]
+    // Add extra height
+    if(randomEnemyData.canFly){
+      final extraHeight = randomSpawn.nextDouble() * 2 * randomEnemyData.textureSize.y;
+      enemy.position.y -= extraHeight;
+    }
+
+    enemy.size = randomEnemyData.textureSize;
     game.add(enemy);
   }
 
@@ -36,7 +43,44 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
       removeFromParent();
     }
 
-
+    // Populate the enemy data list once
+    if(_enemiesTypeList.isEmpty){
+      _enemiesTypeList.addAll([
+        EnemyData(
+          image: game.images.fromCache('enemy_stripes/ghoul_run.png'),
+          nFrames: 7,
+          textureSize: Vector2(31.7, 26),
+          texturePosition: Vector2(31, 0),
+          speedX: 80,
+          canFly: false,
+        ),
+        EnemyData(
+          image: game.images.fromCache('enemy_stripes/bat_fly.png'),
+          nFrames: 3,
+          textureSize: Vector2(32, 32),
+          texturePosition: Vector2(32, 0),
+          speedX: 64,
+          canFly: true,
+        ),
+        EnemyData(
+          image: game.images.fromCache('enemy_stripes/snake.png'),
+          nFrames: 7,
+          textureSize: Vector2(31.5, 20),
+          texturePosition: Vector2(32, 0),
+          speedX: 48,
+          canFly: false,
+        ),
+        EnemyData(
+          image: game.images.fromCache('enemy_stripes/acid_eye.png'),
+          nFrames: 7,
+          textureSize: Vector2(31.5, 21),
+          texturePosition: Vector2(32, 0),
+          speedX: 32,
+          canFly: false,
+        ),
+      ]);
+    }
+    // Start the timer
     enemySpawnTimer.start();
 
     super.onMount();

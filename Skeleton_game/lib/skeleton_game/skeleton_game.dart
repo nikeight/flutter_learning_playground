@@ -19,8 +19,10 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
     'skeleton_stripes/hit.png',
     'skeleton_stripes/dead.png',
     'skeleton_stripes/idle.png',
-    'enemy_stripes/ghoul_run.png'
-    'enemy_stripes/bat_fly.png'
+    'enemy_stripes/ghoul_run.png',
+    'enemy_stripes/bat_fly.png',
+    'enemy_stripes/acid_eye.png',
+    'enemy_stripes/snake.png',
   ];
 
   // List of all the audio assets.
@@ -164,7 +166,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
     add(_skeleton);
     add(_enemyManager);
     _enemyManager.enemySpawnTimer.onTick = () {
-      _enemyManager.spawnEnemies();
+      _enemyManager.spawnRandomEnemies();
     };
   }
 

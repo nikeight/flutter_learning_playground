@@ -17,4 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 Enemy : 
 - Skeleton Pack : 
+- Ghoul Pack : https://elthen.itch.io/2d-pixel-art-ghoul-sprites
 - Bat Fly Pack : https://ome6a1717.itch.io/simple-enemies-bat/download/eyJpZCI6MTU4NDQ2NywiZXhwaXJlcyI6MTcwNjYzOTMwOH0%3d.a5YNRriH8JWm%2bRRfuMi4LJER7BY%3d

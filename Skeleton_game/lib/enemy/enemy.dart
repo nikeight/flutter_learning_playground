@@ -11,6 +11,7 @@ import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 class Enemy extends SpriteAnimationComponent
     with CollisionCallbacks, HasGameReference<SkeletonGame> {
+
   final EnemyData enemyData;
   final rectHitBoxBorder = BasicPalette.darkPink.paint()
     ..style = PaintingStyle.stroke;
@@ -36,7 +37,7 @@ class Enemy extends SpriteAnimationComponent
             parentSize: size,
         )
       ..paint = rectHitBoxBorder
-      ..renderShape = false,
+      ..renderShape = true,
     );
     return super.onLoad();
   }
