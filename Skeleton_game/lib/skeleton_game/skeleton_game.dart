@@ -4,6 +4,7 @@ import 'package:skeleton_walk/models/settings_data.dart';
 import 'package:skeleton_walk/overlays/game_hud.dart';
 import 'package:skeleton_walk/overlays/game_over_overlay.dart';
 import 'package:skeleton_walk/overlays/pause_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -26,7 +27,14 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
   ];
 
   // List of all the audio assets.
-  static const _audioAssets = [''];
+  static const _audioAssets = [
+    'audio/button_click.wav',
+    'audio/bg_music.wav',
+    'audio/axe_swing.wav',
+    'audio/jump.wav',
+    'audio/hit.wav',
+    'audio/dead.wav',
+  ];
 
   late Skeleton _skeleton;
   late PlayerData playerData;
@@ -46,7 +54,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
     settingsData = await _readSettingsData();
 
     // Setup Audio Manager
-    // FGAudioManager.instance.initAudioManager(_audioAssets, settingsData);
+    FGAudioManager.instance.initAudioManager(_audioAssets, settingsData);
 
     /// Create a [ParallaxComponent]
     final parallaxBackground = await loadParallaxComponent(
