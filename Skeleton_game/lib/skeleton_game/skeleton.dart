@@ -4,6 +4,7 @@ import 'package:skeleton_walk/enemy/enemy.dart';
 import 'package:skeleton_walk/models/player_data.dart';
 import 'package:skeleton_walk/overlays/game_hud.dart';
 import 'package:skeleton_walk/overlays/game_over_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -125,8 +126,10 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
   }
 
   void _hitDetected() {
+    FGAudioManager.instance.playSfx(SfxAudioEvent.hit);
     playerData.lives -= 1;
     if (playerData.lives <= 0) {
+      FGAudioManager.instance.playSfx(SfxAudioEvent.died);
       gameOver();
     } else {
       current = SkeletonState.hit;

@@ -5,18 +5,16 @@ part 'settings_data.g.dart';
 
 @HiveType(typeId: 1)
 class SettingsData extends ChangeNotifier with HiveObjectMixin {
-
   static const String settingsDataHiveKey = 'settings_data';
 
-  SettingsData(
-      {bool bgm = false, bool sfx = false, bool halloweenMode = false}) {
+  SettingsData({bool bgm = true, bool sfx = true, bool halloweenMode = false}) {
     _bgm = bgm;
     _sfx = sfx;
     _halloweenMode = halloweenMode;
   }
 
   @HiveField(0)
-  bool _bgm = false;
+  bool _bgm = true;
 
   bool get bgm => _bgm;
 
@@ -27,7 +25,7 @@ class SettingsData extends ChangeNotifier with HiveObjectMixin {
   }
 
   @HiveField(1)
-  bool _sfx = false;
+  bool _sfx = true;
 
   bool get sfx => _sfx;
 

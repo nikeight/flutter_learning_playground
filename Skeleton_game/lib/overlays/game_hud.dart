@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeleton_walk/models/player_data.dart';
 import 'package:skeleton_walk/overlays/pause_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 /// Displays the Players data at the top of the Screen
@@ -96,7 +97,8 @@ class GameHud extends StatelessWidget {
                 gameReference.overlays.remove(GameHud.id);
                 gameReference.overlays.add(PauseOverlay.id);
                 gameReference.pauseEngine();
-                // AudioManager.instance.pauseBgm();
+                FGAudioManager.instance.pauseBgm();
+                FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
               },
               child: const Icon(Icons.pause, color: Colors.white),
             )

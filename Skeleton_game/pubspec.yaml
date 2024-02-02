@@ -32,6 +32,7 @@ flutter:
     - assets/images/skeleton_stripes/
     - assets/images/enemy_stripes/
     - assets/images/other/
+    - assets/audio/
   fonts:
     - family: Audiowide
       fonts:

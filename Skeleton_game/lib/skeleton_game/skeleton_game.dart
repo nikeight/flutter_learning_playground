@@ -28,12 +28,12 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
 
   // List of all the audio assets.
   static const _audioAssets = [
-    'audio/button_click.wav',
-    'audio/bg_music.wav',
-    'audio/axe_swing.wav',
-    'audio/jump.wav',
-    'audio/hit.wav',
-    'audio/dead.wav',
+    'button_click.wav',
+    'bg_music.wav',
+    'axe_swing.wav',
+    'jump.wav',
+    'hit.wav',
+    'dead.wav',
   ];
 
   late Skeleton _skeleton;
@@ -70,11 +70,15 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
     );
 
     add(parallaxBackground);
+
+    // Start BG music
+    FGAudioManager.instance.startBgm('bg_music.wav');
   }
 
   @override
   void onTapDown(TapDownInfo info) {
     _skeleton.updateCollisionTypeForAttackCurrent();
+    FGAudioManager.instance.playSfx(SfxAudioEvent.attack);
     _skeleton.current = SkeletonState.attack;
     super.onTapDown(info);
   }
@@ -85,6 +89,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
   @override
   void onDragEnd(DragEndEvent event) {
     if (event.velocity.y <= 0) {
+      FGAudioManager.instance.playSfx(SfxAudioEvent.jump);
       _skeleton.skeletonJump();
     }
     super.onDragEnd(event);
@@ -203,7 +208,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
 
     if (settingsData == null) {
       await settingsDataBox.put(SettingsData.settingsDataHiveKey,
-          SettingsData(bgm: false, sfx: false, halloweenMode: false));
+          SettingsData(bgm: true, sfx: true, halloweenMode: false));
     }
 
     return settingsDataBox.get(SettingsData.settingsDataHiveKey)!;

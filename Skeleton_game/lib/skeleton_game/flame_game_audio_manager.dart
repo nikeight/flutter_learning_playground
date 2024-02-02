@@ -23,7 +23,7 @@ class FGAudioManager {
   // Starts the given audio file as BGM on loop.
   void startBgm(String fileName) {
     if (settingsData.bgm) {
-      FlameAudio.bgm.play(fileName, volume: 0.4);
+      FlameAudio.bgm.play(fileName, volume: 1.0);
     }
   }
 
@@ -47,9 +47,35 @@ class FGAudioManager {
   }
 
   // Plays the given audio file once.
-  void playSfx(String fileName) {
+  void playSfx(SfxAudioEvent event) {
+    String audioFile = '';
+    switch(event){
+      case SfxAudioEvent.attack:
+        audioFile = 'axe_swing.wav';
+        break;
+      case SfxAudioEvent.jump:
+        audioFile = 'jump.wav';
+        break;
+      case SfxAudioEvent.hit:
+        audioFile = 'hit.wav';
+        break;
+      case SfxAudioEvent.died:
+        audioFile = 'dead.wav';
+        break;
+      case SfxAudioEvent.buttonClick:
+        audioFile = 'button_click.wav';
+        break;
+    }
     if (settingsData.sfx) {
-      FlameAudio.play(fileName);
+      FlameAudio.play(audioFile,volume: 1.0);
     }
   }
+}
+
+enum SfxAudioEvent{
+  attack,
+  jump,
+  hit,
+  died,
+  buttonClick,
 }

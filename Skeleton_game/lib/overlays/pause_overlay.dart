@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:skeleton_walk/models/player_data.dart';
 import 'package:skeleton_walk/overlays/game_hud.dart';
 import 'package:skeleton_walk/overlays/main_menu_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,8 @@ class PauseOverlay extends StatelessWidget {
                         skeletonGameRef.overlays.remove(PauseOverlay.id);
                         skeletonGameRef.overlays.add(GameHud.id);
                         skeletonGameRef.resumeEngine();
-                        // AudioManager.instance.resumeBgm();
+                        FGAudioManager.instance.resumeBgm();
+                        FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
                       },
                       child: const Text(
                         'Resume',
@@ -65,7 +67,8 @@ class PauseOverlay extends StatelessWidget {
                         skeletonGameRef.overlays.remove(PauseOverlay.id);
                         skeletonGameRef.overlays.add(GameHud.id);
                         skeletonGameRef.resumeEngine();
-                        // AudioManager.instance.resumeBgm();
+                        FGAudioManager.instance.resumeBgm();
+                        FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
                       },
                       child: const Text(
                         'Restart',
@@ -81,7 +84,8 @@ class PauseOverlay extends StatelessWidget {
                         skeletonGameRef.reset();
                         skeletonGameRef.playerData.currentScore = 0;
                         skeletonGameRef.playerData.lives = 5;
-                        // AudioManager.instance.resumeBgm();
+                        FGAudioManager.instance.stopBgm();
+                        FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
                       },
                       child: const Text(
                         'Exit',

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:skeleton_walk/overlays/game_hud.dart';
 import 'package:skeleton_walk/overlays/setting_overlay.dart';
+import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 import 'package:flutter/material.dart';
 
@@ -35,9 +36,9 @@ class MainMenuOverLay extends StatelessWidget {
                   const Text(
                     'Skeleton Walk',
                     style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                        fontFamily: 'BlackShepherd',
+                      fontSize: 50,
+                      color: Colors.white,
+                      fontFamily: 'BlackShepherd',
                     ),
                   ),
                   ElevatedButton(
@@ -45,6 +46,8 @@ class MainMenuOverLay extends StatelessWidget {
                       gameReference.startGame();
                       gameReference.overlays.remove(MainMenuOverLay.id);
                       gameReference.overlays.add(GameHud.id);
+                      FGAudioManager.instance
+                          .playSfx(SfxAudioEvent.buttonClick);
                     },
                     child: const Text(
                       'Play',
@@ -56,6 +59,8 @@ class MainMenuOverLay extends StatelessWidget {
                     onPressed: () {
                       gameReference.overlays.remove(MainMenuOverLay.id);
                       gameReference.overlays.add(SettingOverlay.id);
+                      FGAudioManager.instance
+                          .playSfx(SfxAudioEvent.buttonClick);
                     },
                     child: const Text(
                       'Settings',
