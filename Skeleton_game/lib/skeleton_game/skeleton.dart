@@ -173,8 +173,7 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
       if (current != SkeletonState.hit &&
           current != SkeletonState.walk &&
           current != SkeletonState.attack &&
-          current != SkeletonState.dead
-      ) {
+          current != SkeletonState.dead) {
         current = SkeletonState.walk;
         playerData.currentState = SkeletonState.walk;
       }
@@ -192,10 +191,11 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
   void gameOver() {
     playerData.currentState = SkeletonState.dead;
     current = SkeletonState.dead;
-    Future.delayed(const Duration(seconds: 3, milliseconds: 500))
-        .then((value) => game.pauseEngine());
-    game.overlays.remove(GameHud.id);
-    game.overlays.add(GameOverOverlay.id);
+    Future.delayed(const Duration(seconds: 2, milliseconds: 500)).then((value) {
+      game.pauseEngine();
+      game.overlays.remove(GameHud.id);
+      game.overlays.add(GameOverOverlay.id);
+    });
   }
 }
 

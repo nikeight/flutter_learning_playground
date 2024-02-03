@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:skeleton_walk/overlays/game_hud.dart';
+import 'package:skeleton_walk/extensions.dart';
 import 'package:skeleton_walk/overlays/setting_overlay.dart';
 import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
@@ -43,11 +43,8 @@ class MainMenuOverLay extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      gameReference.startGame();
                       gameReference.overlays.remove(MainMenuOverLay.id);
-                      gameReference.overlays.add(GameHud.id);
-                      FGAudioManager.instance
-                          .playSfx(SfxAudioEvent.buttonClick);
+                      gameReference.startSkeletonWalk();
                     },
                     child: const Text(
                       'Play',

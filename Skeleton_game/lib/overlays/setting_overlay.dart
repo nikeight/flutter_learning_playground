@@ -22,8 +22,8 @@ class SettingOverlay extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.8,
             height: MediaQuery.of(context).size.height * 0.8,
             child: Card(
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               color: Colors.black.withAlpha(100),
               child: Padding(
                 padding:
@@ -38,20 +38,12 @@ class SettingOverlay extends StatelessWidget {
                           title: const Text(
                             'Music',
                             style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                            ),
+                                fontSize: 30, fontFamily: 'BlackShepherd'),
                           ),
                           value: bgm,
                           onChanged: (bool value) {
                             Provider.of<SettingsData>(context, listen: false)
                                 .bgm = value;
-                            // if (value) {
-                            //   AudioManager.instance
-                            //       .startBgm('8BitPlatformerLoop.wav');
-                            // } else {
-                            //   AudioManager.instance.stopBgm();
-                            // }
                           },
                         );
                       },
@@ -63,9 +55,7 @@ class SettingOverlay extends StatelessWidget {
                           title: const Text(
                             'Effects',
                             style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                            ),
+                                fontSize: 30, fontFamily: 'BlackShepherd'),
                           ),
                           value: sfx,
                           onChanged: (bool value) {
@@ -82,9 +72,7 @@ class SettingOverlay extends StatelessWidget {
                           title: const Text(
                             'Halloween Mode 💀',
                             style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                            ),
+                                fontSize: 30, fontFamily: 'BlackShepherd'),
                           ),
                           value: halloweenMode,
                           onChanged: (bool value) {

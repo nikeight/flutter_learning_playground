@@ -39,7 +39,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
   late Skeleton _skeleton;
   late PlayerData playerData;
   late SettingsData settingsData;
-  final EnemyManager _enemyManager = EnemyManager();
+  late EnemyManager _enemyManager;
 
   @override
   Future<void> onLoad() async {
@@ -174,10 +174,11 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
       },
       current: SkeletonState.walk,
     );
-
+    _enemyManager = EnemyManager();
 
     add(_skeleton);
     add(_enemyManager);
+
     _enemyManager.enemySpawnTimer.onTick = () {
       _enemyManager.spawnRandomEnemies();
     };

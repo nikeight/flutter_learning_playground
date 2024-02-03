@@ -37,7 +37,7 @@ class Enemy extends SpriteAnimationComponent
             parentSize: size,
         )
       ..paint = rectHitBoxBorder
-      ..renderShape = true,
+      ..renderShape = false,
     );
     return super.onLoad();
   }
@@ -58,11 +58,11 @@ class Enemy extends SpriteAnimationComponent
     // Delete Enemy from the frame if already dodged
     if (position.x < -enemyData.textureSize.x) {
       removeFromParent();
-      game.playerData.currentScore += 1;
     }
     super.update(dt);
   }
 
+  // Score updates only when the Skeleton Kills a enemy
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);

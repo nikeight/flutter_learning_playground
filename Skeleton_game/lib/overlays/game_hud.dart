@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeleton_walk/extensions.dart';
 import 'package:skeleton_walk/models/player_data.dart';
-import 'package:skeleton_walk/overlays/pause_overlay.dart';
-import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 /// Displays the Players data at the top of the Screen
-/// Which Includes
-/// Pause
-/// Highest Score
-/// Current Score
+/// Which Includes [Followed Left to Right Order]
 /// Lives left
+/// Current Score
+/// Highest Score
+/// Pause
 class GameHud extends StatelessWidget {
   final SkeletonGame gameReference;
 
@@ -49,25 +48,6 @@ class GameHud extends StatelessWidget {
                         height: 16,
                       );
                     }
-                    // if (index < lives) {
-                    //   return const Padding(
-                    //     padding: EdgeInsets.symmetric(horizontal: 1),
-                    //     child:  Image(
-                    //       image: AssetImage('assets/images/other/skull_active.png'),
-                    //       width: 16,
-                    //       height: 16,
-                    //     ),
-                    //   );
-                    // } else {
-                    //   return const Padding(
-                    //     padding: EdgeInsets.symmetric(horizontal: 1),
-                    //     child:  Image(
-                    //       image: AssetImage('assets/images/other/skull_inactive.png'),
-                    //       width: 16,
-                    //       height: 16,
-                    //     ),
-                    //   );
-                    // }
                   }),
                 );
               },
@@ -94,11 +74,7 @@ class GameHud extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                gameReference.overlays.remove(GameHud.id);
-                gameReference.overlays.add(PauseOverlay.id);
-                gameReference.pauseEngine();
-                FGAudioManager.instance.pauseBgm();
-                FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
+                gameReference.pauseGamePlay();
               },
               child: const Icon(Icons.pause, color: Colors.white),
             )

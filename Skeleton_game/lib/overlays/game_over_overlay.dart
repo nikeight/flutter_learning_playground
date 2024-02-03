@@ -1,10 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeleton_walk/extensions.dart';
 import 'package:skeleton_walk/models/player_data.dart';
-import 'package:skeleton_walk/overlays/game_hud.dart';
-import 'package:skeleton_walk/overlays/main_menu_overlay.dart';
-import 'package:skeleton_walk/skeleton_game/flame_game_audio_manager.dart';
 import 'package:skeleton_walk/skeleton_game/skeleton_game.dart';
 
 class GameOverOverlay extends StatelessWidget {
@@ -59,11 +57,7 @@ class GameOverOverlay extends StatelessWidget {
                       ),
                       onPressed: () {
                         skeletonGameRef.overlays.remove(GameOverOverlay.id);
-                        skeletonGameRef.overlays.add(MainMenuOverLay.id);
-                        skeletonGameRef.resumeEngine();
-                        skeletonGameRef.reset();
-                        FGAudioManager.instance.stopBgm();
-                        FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
+                        skeletonGameRef.exitGameToMainMenu();
                       },
                     ),
                     const SizedBox(width: 16),
@@ -74,12 +68,7 @@ class GameOverOverlay extends StatelessWidget {
                       ),
                       onPressed: () {
                         skeletonGameRef.overlays.remove(GameOverOverlay.id);
-                        skeletonGameRef.overlays.add(GameHud.id);
-                        skeletonGameRef.resumeEngine();
-                        skeletonGameRef.reset();
-                        skeletonGameRef.startGame();
-                        FGAudioManager.instance.resumeBgm();
-                        FGAudioManager.instance.playSfx(SfxAudioEvent.buttonClick);
+                        skeletonGameRef.startSkeletonWalk(isResetRequired: true,isResumeEngineRequired: true);
                       },
                     )
                   ],
