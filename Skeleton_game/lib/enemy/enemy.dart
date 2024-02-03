@@ -39,6 +39,10 @@ class Enemy extends SpriteAnimationComponent
       ..paint = rectHitBoxBorder
       ..renderShape = false,
     );
+
+    // Add Ground Space
+    position.y -= SkeletonGame.groundSpace;
+
     return super.onLoad();
   }
 

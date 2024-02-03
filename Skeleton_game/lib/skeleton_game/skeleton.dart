@@ -19,6 +19,8 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
 
   double yMax = 0.0;
 
+  int skeletonHeight = 70;
+
   static const double gravity = 800;
 
   final rectHitBoxBorder = BasicPalette.darkRed.paint()
@@ -53,7 +55,7 @@ class Skeleton extends SpriteAnimationGroupComponent<SkeletonState>
     scale = Vector2(2, 2);
 
     // `70` as we have scaled the Skeleton to twice,(not 35)
-    position = Vector2(180, game.size.y - 70);
+    position = Vector2(180, game.size.y - (skeletonHeight + SkeletonGame.groundSpace));
 
     yMax = y;
 

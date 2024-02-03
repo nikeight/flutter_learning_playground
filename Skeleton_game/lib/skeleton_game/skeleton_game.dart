@@ -36,6 +36,9 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
     'dead.wav',
   ];
 
+  // Ground Space
+  static const double groundSpace = 14;
+
   late Skeleton _skeleton;
   late PlayerData playerData;
   late SettingsData settingsData;
@@ -64,6 +67,7 @@ class SkeletonGame extends FlameGame with TapDetector, HasCollisionDetection, Dr
         ParallaxImageData('background/background_3.png'),
         ParallaxImageData('background/background_4.png'),
         ParallaxImageData('background/background_5.png'),
+        ParallaxImageData('background/ground.png'),
       ],
       baseVelocity: Vector2(10, 0),
       velocityMultiplierDelta: Vector2(1.4, 0),

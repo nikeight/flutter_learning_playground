@@ -75,7 +75,7 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
           nFrames: 7,
           textureSize: Vector2(31.5, 21),
           texturePosition: Vector2(32, 0),
-          speedX: 32,
+          speedX: 56,
           canFly: false,
         ),
       ]);
