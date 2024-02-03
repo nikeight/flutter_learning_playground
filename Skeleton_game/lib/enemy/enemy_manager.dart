@@ -33,6 +33,10 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
       enemy.position.y -= extraHeight;
     }
 
+    if(randomEnemyData.scaleEntity){
+      enemy.scale = Vector2(1.5, 1.5);
+    }
+
     enemy.size = randomEnemyData.textureSize;
     game.add(enemy);
   }
@@ -53,6 +57,7 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
           texturePosition: Vector2(31, 0),
           speedX: 80,
           canFly: false,
+          scaleEntity: false,
         ),
         EnemyData(
           image: game.images.fromCache('enemy_stripes/bat_fly.png'),
@@ -61,6 +66,7 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
           texturePosition: Vector2(32, 0),
           speedX: 64,
           canFly: true,
+          scaleEntity: true,
         ),
         EnemyData(
           image: game.images.fromCache('enemy_stripes/snake.png'),
@@ -69,6 +75,7 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
           texturePosition: Vector2(32, 0),
           speedX: 48,
           canFly: false,
+          scaleEntity: true,
         ),
         EnemyData(
           image: game.images.fromCache('enemy_stripes/acid_eye.png'),
@@ -77,6 +84,7 @@ class EnemyManager extends Component with HasGameReference<SkeletonGame> {
           texturePosition: Vector2(32, 0),
           speedX: 56,
           canFly: false,
+          scaleEntity: true,
         ),
       ]);
     }

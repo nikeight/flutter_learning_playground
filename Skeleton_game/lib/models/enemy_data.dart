@@ -7,6 +7,7 @@ class EnemyData {
   final Vector2 texturePosition;
   final double speedX;
   final bool canFly;
+  final bool scaleEntity;
 
   const EnemyData({
     required this.image,
@@ -15,5 +16,6 @@ class EnemyData {
     required this.texturePosition,
     required this.speedX,
     required this.canFly,
+    required this.scaleEntity,
   });
 }
