@@ -1,5 +1,10 @@
+import 'package:animations/implicit/built_in/implicit_aniamte_padding.dart';
 import 'package:animations/implicit/built_in/implicit_animate_align.dart';
 import 'package:animations/implicit/built_in/implicit_animate_container.dart';
+import 'package:animations/implicit/built_in/implicit_animate_opacity.dart';
+import 'package:animations/implicit/built_in/implicit_animate_rotation.dart';
+import 'package:animations/implicit/built_in/implicit_animate_scale.dart';
+import 'package:animations/implicit/built_in/implicit_animate_slide.dart';
 import 'package:animations/implicit/built_in/implicit_animate_text.dart';
 import 'package:animations/implicit/built_in/implicit_modal.dart';
 import 'package:flutter/material.dart';
@@ -28,15 +33,15 @@ class ImplicitBuiltInHomeScreen extends StatelessWidget {
       case ImplicitBuiltIn.animatedDefaultTextStyle:
         return const ImplicitAnimateText();
       case ImplicitBuiltIn.animatedScale:
-        return Text(animationType.name);
+        return const ImplicitAnimateScale();
       case ImplicitBuiltIn.animatedRotation:
-        return Text(animationType.name);
+        return const ImplicitAnimateRotation();
       case ImplicitBuiltIn.animatedSlide:
-        return Text(animationType.name);
+        return const ImplicitAnimateSlide();
       case ImplicitBuiltIn.animatedOpacity:
-        return Text(animationType.name);
+        return const ImplicitAnimateOpacity();
       case ImplicitBuiltIn.animatedPadding:
-        return Text(animationType.name);
+        return const ImplicitAnimatePadding();
       case ImplicitBuiltIn.animatedPhysicalModel:
         return Text(animationType.name);
       case ImplicitBuiltIn.animatedPositioned:
