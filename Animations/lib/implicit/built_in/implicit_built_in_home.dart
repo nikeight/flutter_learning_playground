@@ -1,9 +1,14 @@
 import 'package:animations/implicit/built_in/implicit_aniamte_padding.dart';
 import 'package:animations/implicit/built_in/implicit_animate_align.dart';
 import 'package:animations/implicit/built_in/implicit_animate_container.dart';
+import 'package:animations/implicit/built_in/implicit_animate_cross_fade.dart';
 import 'package:animations/implicit/built_in/implicit_animate_opacity.dart';
+import 'package:animations/implicit/built_in/implicit_animate_physical_modal.dart';
+import 'package:animations/implicit/built_in/implicit_animate_positioned.dart';
+import 'package:animations/implicit/built_in/implicit_animate_positioned_directional.dart';
 import 'package:animations/implicit/built_in/implicit_animate_rotation.dart';
 import 'package:animations/implicit/built_in/implicit_animate_scale.dart';
+import 'package:animations/implicit/built_in/implicit_animate_size.dart';
 import 'package:animations/implicit/built_in/implicit_animate_slide.dart';
 import 'package:animations/implicit/built_in/implicit_animate_text.dart';
 import 'package:animations/implicit/built_in/implicit_modal.dart';
@@ -43,17 +48,17 @@ class ImplicitBuiltInHomeScreen extends StatelessWidget {
       case ImplicitBuiltIn.animatedPadding:
         return const ImplicitAnimatePadding();
       case ImplicitBuiltIn.animatedPhysicalModel:
-        return Text(animationType.name);
+        return const ImplicitAnimatePhysicalModal();
       case ImplicitBuiltIn.animatedPositioned:
-        return Text(animationType.name);
+        return const ImplicitAnimatePositioned();
       case ImplicitBuiltIn.animatedPositionedDirectional:
-        return Text(animationType.name);
+        return const ImplicitAnimatePositionedDirectional();
       case ImplicitBuiltIn.animatedTheme:
         return Text(animationType.name);
       case ImplicitBuiltIn.animatedCrossFade:
-        return Text(animationType.name);
+        return const ImplicitAnimateCrossFade();
       case ImplicitBuiltIn.animatedSize:
-        return Text(animationType.name);
+        return const ImplicitAnimateSize();
       case ImplicitBuiltIn.animatedSwitcher:
         return Text(animationType.name);
     }
