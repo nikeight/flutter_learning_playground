@@ -1,3 +1,4 @@
+import 'package:animations/explicit/built_in/explicit_align_transition.dart';
 import 'package:animations/explicit/explicit_modal.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class ExplicitBuiltInHomeScreen extends StatelessWidget {
   Widget getSelectedWidget(ExplicitBuiltIn type) {
     switch (animationType) {
       case ExplicitBuiltIn.alignTransition:
-        return Text(animationType.name);
+        return const ExplicitAlignTransition();
       case ExplicitBuiltIn.animatedModalBarrier:
         return Text(animationType.name);
       case ExplicitBuiltIn.decoratedBoxTransition:

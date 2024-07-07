@@ -1,3 +1,5 @@
+import 'package:animations/explicit/circular_eight_hand_loading.dart';
+import 'package:animations/explicit/circular_shrink_grow_loader.dart';
 import 'package:animations/implicit/built_in/implicit_aniamte_padding.dart';
 import 'package:animations/implicit/built_in/implicit_animate_align.dart';
 import 'package:animations/implicit/built_in/implicit_animate_container.dart';
@@ -11,7 +13,9 @@ import 'package:animations/implicit/built_in/implicit_animate_scale.dart';
 import 'package:animations/implicit/built_in/implicit_animate_size.dart';
 import 'package:animations/implicit/built_in/implicit_animate_slide.dart';
 import 'package:animations/implicit/built_in/implicit_animate_text.dart';
+import 'package:animations/implicit/built_in/implicit_animate_theme.dart';
 import 'package:animations/implicit/built_in/implicit_modal.dart';
+import 'package:animations/implicit/built_in/semi_cicrle_scanner_radiator.dart';
 import 'package:flutter/material.dart';
 
 class ImplicitBuiltInHomeScreen extends StatelessWidget {
@@ -54,13 +58,13 @@ class ImplicitBuiltInHomeScreen extends StatelessWidget {
       case ImplicitBuiltIn.animatedPositionedDirectional:
         return const ImplicitAnimatePositionedDirectional();
       case ImplicitBuiltIn.animatedTheme:
-        return Text(animationType.name);
+        return const ImplicitAnimateTheme();
       case ImplicitBuiltIn.animatedCrossFade:
         return const ImplicitAnimateCrossFade();
       case ImplicitBuiltIn.animatedSize:
         return const ImplicitAnimateSize();
       case ImplicitBuiltIn.animatedSwitcher:
-        return Text(animationType.name);
+        return const Text('Animate Switcher');
     }
   }
 }
